@@ -27,7 +27,7 @@
       
       <script>
           var vm = new Vue({
-              el: "#app",
+              // el: "#app",
               data: {
                 title: "商品管理",
                 newProduct: {
@@ -49,6 +49,8 @@
                   }
               },
           });
+
+          vm.$mount("#app");
       </script>
   </body>
 </html>
