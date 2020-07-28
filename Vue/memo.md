@@ -1,7 +1,7 @@
 渡一教育视频地址
 - https://ke.qq.com/course/2588158?taid=9173255577894398
 
-## 第一节笔记
+## 第一节-初识Vue
   
 ### VUE的特点
   - 渐进式
@@ -36,7 +36,7 @@
     - <Tips: vsc执行本地服务器>
       - 对着html邮件，点击open with live server
 ---
-## 第二节笔记
+## 第二节-vue核心概念
 ### Vue实例
   创建实例后，一些配置会提升到Vue实例中。
   - 提升实例的原因有二，一个是模版需要，一个是实现响应式（通过Object.defineProperty）。
@@ -118,7 +118,7 @@
     2. 计算属性会进行缓存,如果缓存不改变,则直接使用缓存结果,不会重新计算 
   ```
 ---
-## 第三节笔记
+## 第三节-组件核心概念
 ### ES6模块化
    - 没有模块化的世界：全局变量污染
    - 常见的模块化标准：CommonJS，ES6 Module，AMD，CMD
@@ -247,3 +247,78 @@ var comp = {
 ### 向组件传递数据
 1. props里面添加属性
 2. 使用属性。同样是把组件当成元素, 给元素的属性赋值就会赋值给props
+---
+## 第四节-使用脚手架搭建工程
+### 传统工程的问题
+省略.....
+### vue-cli的安装
+vue-cli是一个脚手架工具，它集成了很多前端技术。
+这些工具，都需要
+- node环境
+- npm: 包管理器，用于下载各种第三方库
+
+## 安装node
+
+下载node：https://nodejs.org/zh-cn/
+
+## 验证安装
+
+打开终端，查看node和npm版本，验证是否安装成功:
+
+```shell
+node -v
+npm -v
+```
+
+查看源地址是否正确
+
+```shell
+npm config get registry
+```
+
+## 搭建工程
+```shell
+vue create 工程名
+```
+1. 执行create之后会问你手动还是自动创建，选择手动
+2. 只选择Babel（在linter上按空格取消选择）
+```
+❯◉ Babel   // 控制新版本代码的兼容性
+ ◯ TypeScript
+ ◯ Progressive Web App (PWA) Support
+ ◯ Router
+ ◯ Vuex
+ ◯ CSS Pre-processors
+ ◉ Linter / Formatter // 代码风格的检查
+ ◯ Unit Testing
+ ◯ E2E Testing
+```
+3. 接下来问你需要pakages.json吗，选择是。
+4. 接下来会问你配置是否应用到将来的项目，输入N
+
+## 工程讲解
+> node_modules: 各种依赖。Vue以及Vue的依赖。
+
+> public: 浏览器图标，index.html
+
+> src:自己写的所有代码
+
+tips
+1. 第三方库不需要写路径，会自动上node_modules里面找。相对路径开头才是自己写的代码。
+```js
+import Vue from 'vue'
+```
+2. App.vue文件
+
+   - 浏览器不认识，经过vue-cli处理可以执行
+
+3. assets：静态资源。图片跟全局css
+4. babel.config.js: 兼容性设置文件
+5. package.json： 各种工程信息
+6. README.md: 说明文档
+
+## 构建并部署代码
+npm run build: 把自己写的代码编译成可以运行的代码。执行完成之后会生成一个dist文件夹。dist用于部署
+
+## 热重载
+npm run serve
