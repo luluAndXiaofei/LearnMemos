@@ -110,9 +110,140 @@
    2. template: 字符串, 配置模版
    3. el: 配置挂载的区域
    4. methods: 配置方法
-   5. computed: 配置计算属性
+   5. computed: 配置计算属性。
+   > computed： 里面写方法，但当作属性用
   - 计算属性跟方法的区别
   ```c
     1. 计算属性使用时,是当成属性使用,而方法是调用的
     2. 计算属性会进行缓存,如果缓存不改变,则直接使用缓存结果,不会重新计算 
-  ```  
+  ```
+---
+## 第三节笔记
+### ES6模块化
+   - 没有模块化的世界：全局变量污染
+   - 常见的模块化标准：CommonJS，ES6 Module，AMD，CMD
+   - 在ES6中一个文件就是一个模块。要想让一个普通的js文件变成模块需要指定type=module
+     ```html
+      <script src="index.js" type="module"></script>
+     ```
+   - 要想导出一个模块使用export关键字，导入一个模块使用import关键字
+   - 导出有三种方式。以下导出的结果是{default:fn, double:fn, n:3}
+      1. 默认导出
+      ```js
+      export default (a, b) {
+          return a + b;
+      }
+      ```
+
+      2. 普通导出
+      ```js
+      export function double(a) {
+        return a * 2;
+      }
+      ```
+
+      3. 变量导出
+      ```js
+      export var n = 3;
+      ```
+   - 导入时也有几种方式
+      1. 导入上述默认(sum只是default的任意别名)
+      ```js
+      import sum from './a.js';
+      sum(1, 2);
+      ``` 
+      2. 导入上述普通， 变量
+      ```js
+      import {double} from './a.js';
+      import {n} from './a.js';
+      double(n);
+      ```
+      3. 导入上述全部
+      ```js
+      import * as obj from './a.js';
+      obj.default(1, 2);
+      obj.double(3);
+      console.log(obj.n);
+      ```
+      4. 导入运行代码。一般用于初始化，但是import会缓存，所以多次导入也只会运行一次。
+      ```js
+      import "./justRun.js"
+      ```
+### 组件开发
+- 所谓组件化， 即把一个页面中区域功能细分， 每一个区域成为一个组件，每个组件包括：
+1. 功能（js代码）
+2. 内容（模版代码）
+3. 样式（CSS代码）
+
+- 组件命名一般是大驼峰，一个组件实际上是个对象。
+### 创建组件方法
+
+跟Vue的实例类似，但有以下不同
+ 0. 只是普通的对象，并不是Vue对象
+ 1. 无el, 但有类似的template,所以模版必须配置在template中
+ 2. data必须是一个函数，该函数必须返回对象，并把该对象作为数据。因为复用数据时可以相对独立，互不影响。
+
+组件的例子
+```js
+var comp = {
+  data() {
+    return {
+      ///
+    }
+  },
+
+  template: `....`,
+
+  computed: {
+    //
+  },
+
+  methods: {
+    method1() {
+
+    },
+  }
+}
+```
+
+### 组件导入方法
+1. 组件本身导出
+ ```js
+ export default {
+    // data() {
+    //     return {
+    //         name: "张三",
+    //         age: 18,
+    //     };
+    // },
+    props: ["name", "age"],
+    template,
+}
+ ```
+
+2. 使用组件处导入
+ ```js
+ import UserInfo from "./components/UserInfo.js";
+ ```
+
+### 组件注册方法
+
+组件注册分为**全局注册**跟**局部注册**。
+1. 全局注册：
+   ```js
+   Vue.component('UsrInfo', UserInfo);
+   ```
+2. 局部注册：
+   ```js
+   new Vue() {
+     components: {
+       UserInfo: UserInfo
+     }
+   }
+   ```
+### 应用组件
+把组件当成元素去使用即可。
+
+### 向组件传递数据
+1. props里面添加属性
+2. 使用属性。同样是把组件当成元素, 给元素的属性赋值就会赋值给props
