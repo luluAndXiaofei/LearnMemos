@@ -181,7 +181,7 @@
 跟Vue的实例类似，但有以下不同
  0. 只是普通的对象，并不是Vue对象
  1. 无el, 但有类似的template,所以模版必须配置在template中
- 2. data必须是一个函数，该函数必须返回对象，并把该对象作为数据。因为复用数据时可以相对独立，互不影响。
+ 2. data必须是一个[**函数**]，该函数必须返回对象，并把该对象作为数据。因为复用数据时可以相对独立，互不影响。
 
 组件的例子
 ```js
@@ -247,8 +247,12 @@ var comp = {
 ### 向组件传递数据
 1. props里面添加属性
 2. 使用属性。同样是把组件当成元素, 给元素的属性赋值就会赋值给props
+
+
 ---
 ## 第四节-使用脚手架搭建工程
+
+
 ### 传统工程的问题
 省略.....
 ### vue-cli的安装
@@ -318,7 +322,83 @@ import Vue from 'vue'
 6. README.md: 说明文档
 
 ## 构建并部署代码
-npm run build: 把自己写的代码编译成可以运行的代码。执行完成之后会生成一个dist文件夹。dist用于部署
+把自己写的代码编译成可以运行的代码。执行完成之后会生成一个dist文件夹。dist用于部署
 
-## 热重载
-npm run serve
+```shell
+$ npm run build
+```
+
+
+## 热重载(第一次需要npm install)
+```shell
+$ npm run serve
+```
+
+---
+## 第五节-制作轮播图组件
+
+- .vue文件中输入defualt会自动生成templates, script, style。只输入java则生成script。
+- 快捷生成下列代码，只需输入div.banner-container
+   ```js
+   <div class="banner-container"></div>
+   ```
+- template必须有内容。script跟style可以没有内容
+
+- tips。html的style属性
+   -  在html标签内使用style属性是为了直接使用css样式。直接对改对象加入css样式。
+
+   - 一般的html标签都可以加入style属性直接使用css样式。
+
+    ```html
+    <div style="css样式"><div>
+    <span style="css样式"></div>
+    <ul style="css样式"></ul>
+    <li style="css样式"></li>
+    ```
+- css3中的transition:规定完成过渡效果需要多少秒或毫秒
+
+    ```css
+      .images {
+        height: 100%;
+        transition: 0.5s;
+      }
+  ```
+
+- props约束属性类型的写法
+  - 不约束
+  ```js
+      props:["banners",]
+  ```
+  - 约束属性类型为Array，必须传递
+  ```js
+      props: {
+            banners: {
+                type: Array,
+                required: true,
+            },
+        }
+  ```
+- 组件中读取动态文件路径需要转换模块！！！
+
+  ```js
+  下面的例子中，item.url动态指定项目内的文件路径，如果传入方直接写项目路径，打包时会无法正确转化成运行路径。
+
+  <a :href="item.link"><img :src="item.url" alt=""></a>
+  ```
+
+  ```js
+  所以传入方应该将文件路径模块化之后再传入。方法1:使用required()方法。
+  
+  banners: [
+    { url: require("./assets/banner/banner1.jpeg"), link: "" },
+  ],
+  ```
+
+  ```js
+  方法2:使用import。因为在webpack中，任何东西都是模块，所以文件路径也可以被模块化导入。
+  
+  import banner1 from "./assets/banner/banner1.jpeg";
+  banners: [
+    { url: banner1), link: "" },
+  ],
+  ```
