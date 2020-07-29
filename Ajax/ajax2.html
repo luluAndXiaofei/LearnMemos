@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>请求Json</title>
+</head>
+<body>
+    <button id="button1">button1</button>
+    <button id="button2">button2</button>
+
+    <h1>单个用户</h1>
+    <div id="user"></div>
+
+    <h1>多个用户</h1>
+    <div id="users"></div>
+    
+    <script>
+        document.getElementById("button1").addEventListener("click", loadUser);
+
+        function loadUser() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "user.json", true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var user = JSON.parse(xhr.responseText);
+                    console.log(user);
+                }
+            }
+
+            xhr.send();
+        }
+
+        document.getElementById("button2").addEventListener("click", loadUsers);
+
+        function loadUsers() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "users.json", true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var users = JSON.parse(xhr.responseText);
+                    console.log(users);
+                }
+            }
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
