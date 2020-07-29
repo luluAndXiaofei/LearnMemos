@@ -5,6 +5,7 @@
       class="images"
       :style="{
         width: banners.length * 100 + '%',
+        marginLeft: -index * 100 + '%',
       }"
     >
       <!-- <li>
@@ -17,13 +18,20 @@
               <a href=""><img src="../assets/banner/banner3.jpeg" alt=""></a>
           </li> -->
       <li v-for="(item, i) in banners" :key="i">
-        <a :href="item.link"><img :src="item.url" alt=""/></a>
+        <a :href="item.link"><img :src="item.url" alt="" /></a>
       </li>
     </ul>
     <ul class="dots">
-      <li class="active"></li>
+      <!-- <li class="active"></li>
       <li></li>
-      <li></li>
+      <li></li> -->
+      <li
+        v-for="(item, i) in banners"
+        :key="i"
+        :class="{
+          active: index === i,
+        }"
+      ></li>
     </ul>
   </div>
 </template>
@@ -36,6 +44,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      index: 0,
+    };
   },
 };
 </script>

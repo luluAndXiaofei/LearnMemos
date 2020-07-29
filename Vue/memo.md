@@ -337,12 +337,13 @@ $ npm run serve
 ---
 ## 第五节-制作轮播图组件
 
-- .vue文件中输入defualt会自动生成templates, script, style。只输入java则生成script。
-- 快捷生成下列代码，只需输入div.banner-container
+- tips。.vue文件中输入defualt会自动生成templates, script, style。只输入java则生成script。
+
+- tips。快捷生成下列代码，只需输入div.banner-container
    ```js
    <div class="banner-container"></div>
    ```
-- template必须有内容。script跟style可以没有内容
+- tips。template必须有内容。script跟style可以没有内容
 
 - tips。html的style属性
    -  在html标签内使用style属性是为了直接使用css样式。直接对改对象加入css样式。
@@ -355,7 +356,7 @@ $ npm run serve
     <ul style="css样式"></ul>
     <li style="css样式"></li>
     ```
-- css3中的transition:规定完成过渡效果需要多少秒或毫秒
+- tips。css3中的transition:规定完成过渡效果需要多少秒或毫秒
 
     ```css
       .images {
@@ -364,21 +365,23 @@ $ npm run serve
       }
   ```
 
-- props约束属性类型的写法
-  - 不约束
+## props约束属性类型的写法
+  不约束
   ```js
-      props:["banners",]
+  props:["banners",]
   ```
-  - 约束属性类型为Array，必须传递
+  约束属性类型为Array，必须传递
   ```js
-      props: {
-            banners: {
-                type: Array,
-                required: true,
-            },
-        }
+  props: {
+        banners: {
+            type: Array,
+            required: true,
+        },
+    }
   ```
-- 组件中读取动态文件路径需要转换模块！！！
+
+## 组件中读取动态文件路径
+读取动态文件路径需要转换模块！！！
 
   ```js
   下面的例子中，item.url动态指定项目内的文件路径，如果传入方直接写项目路径，打包时会无法正确转化成运行路径。
@@ -402,3 +405,60 @@ $ npm run serve
     { url: banner1), link: "" },
   ],
   ```
+
+## Class 与 Style 绑定
+
+  操作元素的 class 列表和内联样式是数据绑定的一个常见需求。因为它们都是 attribute，所以我们可以用 v-bind 处理它们：只需要通过表达式计算出字符串结果即可。不过，字符串拼接麻烦且易错。因此，在将 v-bind 用于 class 和 style 时，Vue.js 做了专门的增强。表达式结果的类型除了字符串之外，还可以是对象或数组。
+
+### 绑定Html Class
+我们可以传给 v-bind:class 一个对象，以动态地切换 class：
+```html
+<div v-bind:class="{ active: isActive }"></div>
+```
+此外，v-bind:class 指令也可以与普通的 class attribute 共存。当有如下模板：
+```html
+<div
+  class="static"
+  v-bind:class="{ active: isActive, 'text-danger': hasError }"
+></div>
+```
+和如下 data：
+```js
+data: {
+  isActive: true,
+  hasError: false
+}
+```
+结果渲染为：
+```html
+<div class="static active"></div>
+```
+
+
+### 绑定Html style
+v-bind:style 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名：
+
+```html
+<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+```
+
+```js
+data: {
+  activeColor: 'red',
+  fontSize: 30
+}
+```
+
+直接绑定到一个样式对象通常更好，这会让模板更清晰：
+```html
+<div v-bind:style="styleObject"></div>
+```
+
+```js
+data: {
+  styleObject: {
+    color: 'red',
+    fontSize: '13px'
+  }
+}
+```
