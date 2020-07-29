@@ -365,6 +365,15 @@ $ npm run serve
       }
   ```
 
+- tips。html中可以使用 data-* 属性来嵌入自定义数据：
+```html
+<ul>
+<li data-animal-type="鸟类">喜鹊</li>
+<li data-animal-type="鱼类">金枪鱼</li> 
+<li data-animal-type="蜘蛛">蝇虎</li> 
+</ul>
+```
+
 ## props约束属性类型的写法
   不约束
   ```js
@@ -462,3 +471,6 @@ data: {
   }
 }
 ```
+
+### vue的生命周期
+![avatar](https://cn.vuejs.org/images/lifecycle.png)

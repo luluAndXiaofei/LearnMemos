@@ -1,22 +1,7 @@
 <template>
-  <div class="banner-container">
+  <div class="banner-container" @mouseenter="autoStop" @mouseleave="autoStart">
     <!-- <ul class="images" style="width:300%"> -->
-    <ul
-      class="images"
-      :style="{
-        width: banners.length * 100 + '%',
-        marginLeft: -index * 100 + '%',
-      }"
-    >
-      <!-- <li>
-              <a href=""><img src="../assets/banner/banner1.jpeg" alt=""></a>
-          </li>
-          <li>
-              <a href=""><img src="../assets/banner/banner2.jpeg" alt=""></a>
-          </li>
-          <li>
-              <a href=""><img src="../assets/banner/banner3.jpeg" alt=""></a>
-          </li> -->
+    <ul class="images" :style="styleObject">
       <li v-for="(item, i) in banners" :key="i">
         <a :href="item.link"><img :src="item.url" alt="" /></a>
       </li>
@@ -31,6 +16,7 @@
         :class="{
           active: index === i,
         }"
+        @click="index = i"
       ></li>
     </ul>
   </div>
@@ -45,15 +31,51 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
       index: 0,
+      timer: null,
     };
+  },
+
+  created() {
+    console.log("创建了");
+    this.autoStart();
+  },
+
+  destoried() {
+    this.autoStop();
+  },
+
+  methods: {
+    autoStart() {
+      if (this.timer) {
+        return;
+      }
+      this.timer = setInterval(() => {
+        this.index = (this.index + 1) % this.banners.length;
+      }, 3000);
+    },
+
+    autoStop() {
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+  },
+
+  computed: {
+    styleObject() {
+      return {
+        width: this.banners.length * 100 + "%",
+        marginLeft: -this.index * 100 + "%",
+      };
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .banner-container {
   height: 350px;
   position: relative;
