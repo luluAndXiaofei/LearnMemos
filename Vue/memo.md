@@ -474,3 +474,60 @@ data: {
 
 ### vue的生命周期
 ![avatar](https://cn.vuejs.org/images/lifecycle.png)
+
+---
+## 第六节-获取新闻数据
+
+### axios
+使用axios库可以轻松的发送一个ajax请求
+
+### 安装axios
+npm install axios
+
+### async, await
+js语法糖，async返回一个Promise对象。
+
+- async 告诉程序这是一个异步，awiat 会暂停执行async中的代码，等待await 表达式后面的结果，跳过async 函数，继续执行后面代码
+
+- async 函数会返回一个Promise 对象，那么当 async 函数返回一个值时，Promise 的 resolve 方法会负责传递这个值；当 async 函数抛出异常时，Promise 的 reject 方法也会传递这个异常值
+
+- await  操作符用于等待一个Promise 对象，并且返回 Promise 对象的处理结果（成功把resolve 函数参数作为await 表达式的值），如果等待的不是 Promise 对象，则用 Promise.resolve(xx) 转化
+
+- 由于async函数返回的是一个Promise对象，要接收asnyc里真正return的值有两种写法
+1. 使用then接收，Promise 的 resolve 方法会负责传递这个值
+
+```js
+async function getNewsChannles() {
+    var res = await axios.get("newsChannels.json");
+    return res.data;
+}
+
+getNewsChannles().then(res => {
+  console.log(res);
+});
+```
+
+### Promise对象
+创建Promise对象时，传入一个执行函数，该函数会立即执行。
+Promise.then是当Promise的状态变成rejected时才调用。
+
+```js
+p2 = new Promise(function(resolve, reject) {
+    console.log("start");
+    setTimeout(function() {
+        resolve({
+            message: "撸撸会做晚饭",
+            code: 200
+        });
+    }, 5 * 1000);
+});
+
+p2.then(value => console.log(value)); // 10S后打印
+console.log("after promise run"); // 首先打印
+```
+
+#### Promise状态
+Promise有三种状态，pending（进行中）、fulfilled（已成功）和rejected（已失败）。
+
+> resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+
