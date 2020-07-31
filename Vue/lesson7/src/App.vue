@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <div style="width:1080px; margin:0 auto">
-      <Banner :banners="banners" />
+      <!-- <Banner :banners="banners" /> -->
+      <Channels />
     </div>
   </div>
 </template>
 
 <script>
 import Banner from "./components/Banner";
+import Channels from "./components/news/Channels";
 
 export default {
   components: {
     Banner,
+    Channels,
   },
   data() {
     return {

@@ -531,3 +531,12 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 
 > resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
 
+---
+## 第七节-开发新闻类别组件
+
+## Tips: css各种属性
+- cursor:pointer 鼠标指针变化
+- hover: 鼠标悬停
+- background: 背景色
+- border-radius: 边框弧度
+- border: 1px solid #ccc; 边框的粗度 颜色
