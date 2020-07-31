@@ -1,25 +1,57 @@
 <template>
-    <div class="news-types">
-        <div class="item"><span class="name">Lorrem.</span></div>
-        <div class="item"><span class="name">Lorrem.</span></div>
-        <div class="item"><span class="name">Lorrem.</span></div>
-        <div class="item"><span class="name">Lorrem.</span></div>
-        <div class="item"><span class="name">Lorrem.</span></div>
-        <div class="item"><span class="name">Lorrem.</span></div>
-        <a href="">收起</a>
+  <div class="news-types" v-if="channels.length > 0">
+    <div
+      class="item"
+      v-for="(item, i) in showChannels"
+      :key="i"
+      :class="{
+        active: chooseId === item.id,
+      }"
+      @click="changeChannelId(item.id)"
+    >
+      <span class="name">{{ item.name }}</span>
     </div>
+    <a href="" @click.prevent="isCollopased = !isCollopased">{{
+      isCollopased ? "展开" : "收起"
+    }}</a>
+  </div>
 </template>
 
 <script>
 import { getNewsChannles } from "@/services/newsSevice";
 
 export default {
-    data() {
-        return {
-            channels: [],
-        }
+  data() {
+    return {
+      channels: [],
+      isCollopased: true,
+      chooseId: null,
+    };
+  },
+
+  computed: {
+    showChannels() {
+      if (this.isCollopased) {
+        return this.channels.slice(0, 8);
+      } else {
+        return this.channels;
+      }
+    },
+  },
+
+  methods: {
+    changeChannelId(id) {
+      this.chooseId = id;
+      this.$emit("changeChannel", id);
     }
-}
+  },
+
+  async created() {
+    var res = await getNewsChannles();
+    this.channels = res;
+    this.changeChannelId(res[0].id);
+  },
+};
 </script>
 
 <style>
@@ -52,5 +84,4 @@ export default {
   margin-bottom: 20px;
   color: #409eff;
 }
-
 </style>

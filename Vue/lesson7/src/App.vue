@@ -2,7 +2,7 @@
   <div id="app">
     <div style="width:1080px; margin:0 auto">
       <!-- <Banner :banners="banners" /> -->
-      <Channels />
+      <Channels @changeChannel="handleChange" />
     </div>
   </div>
 </template>
@@ -25,5 +25,10 @@ export default {
       ],
     };
   },
+  methods: {
+    handleChange(id) {
+      console.log(id);
+    }
+  }
 };
 </script>

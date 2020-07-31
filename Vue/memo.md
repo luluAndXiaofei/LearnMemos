@@ -113,7 +113,7 @@
    5. computed: 配置计算属性。
    > computed： 里面写方法，但当作属性用
   - 计算属性跟方法的区别
-  ```c
+  ```
     1. 计算属性使用时,是当成属性使用,而方法是调用的
     2. 计算属性会进行缓存,如果缓存不改变,则直接使用缓存结果,不会重新计算 
   ```
@@ -540,3 +540,32 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 - background: 背景色
 - border-radius: 边框弧度
 - border: 1px solid #ccc; 边框的粗度 颜色
+
+## 事件修饰符
+
+```html
+<!-- 阻止单击事件继续传播 -->
+<a v-on:click.stop="doThis"></a>
+
+<!-- 提交事件不再重载页面 -->
+<form v-on:submit.prevent="onSubmit"></form>
+
+<!-- 修饰符可以串联 -->
+<a v-on:click.stop.prevent="doThat"></a>
+
+<!-- 只有修饰符 -->
+<form v-on:submit.prevent></form>
+
+<!-- 添加事件监听器时使用事件捕获模式 -->
+<!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+<div v-on:click.capture="doThis">...</div>
+
+<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+<!-- 即事件不是从内部元素触发的 -->
+<div v-on:click.self="doThat">...</div>
+```
+
+## this.$emit触发事件
+- 参数：
+  - {string} eventName
+  - [...args]
