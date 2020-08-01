@@ -569,3 +569,6 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 - 参数：
   - {string} eventName
   - [...args]
+
+---
+## 第八节-开发新闻列表组件
