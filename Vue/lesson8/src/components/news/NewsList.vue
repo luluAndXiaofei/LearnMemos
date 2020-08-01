@@ -7,9 +7,17 @@
         </a>
       </div>
       <div class="word">
-          <h2 class="title">
-              <a :href="item.link" target="_blank">{{item.title}}</a>
-          </h2>
+        <h2 class="title">
+          <a :href="item.link" target="_blank">{{ item.title }}</a>
+        </h2>
+      </div>
+      <div class="aside">
+        <span>{{ item.name }}</span>
+        <span>来源：{{ item.source }}</span>
+        <span>发布日期：{{ item.putDate }}</span>
+      </div>
+      <div class="content">
+        {{ item.content }}
       </div>
     </div>
   </div>
