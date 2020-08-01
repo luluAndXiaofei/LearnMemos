@@ -1,0 +1,21 @@
+/* div{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+} */
+
+#only {
+    background-color: red;
+}
+
+.demo {
+    background-color:#ff0;
+}
+
+.demo1 {
+    color: #f40;
+}
+
+span {
+    color: blueviolet;
+}
