@@ -572,3 +572,35 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 
 ---
 ## 第八节-开发新闻列表组件
+
+---
+## 第九节-开发加载组件
+
+### 插槽
+模版中的某个位置，不知道内容。此时可以使用<slot></slot>进行占位。
+
+```html
+<template>
+  <div class="center">
+      <slot></slot>
+  </div>
+</template>
+```
+
+### 往插槽里插入内容
+直接往便签里写值即可。
+
+```html
+ <Center>123</Center>
+```
+
+### 插槽默认值
+插槽可以有默认值，当设置值时不显示默认值，反之显示默认值
+
+```html
+<template>
+  <div class="center">
+      <slot>默认值</slot>
+  </div>
+</template>
+```

@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .news-item-normal {
   border-bottom: 1px solid #ccc;
   overflow: hidden;
