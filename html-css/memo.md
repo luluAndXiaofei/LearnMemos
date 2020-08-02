@@ -243,3 +243,105 @@ id|100
 class/属性/伪类|10
 标签/为元素|1
 通配符|0
+
+5. 父子选择器（派生选择器）
+选择的东西还会放在后面，前面的是它的父亲。
+
+```css
+div span {
+    color: blueviolet;
+}
+```
+
+6. 直接子元素选择器
+符元素 > 子元素。这样选中的是斜体2，而不是斜体1。
+
+```css
+div > em {
+    background-color: cadetblue;
+}
+```
+
+```html
+<div class="wrapper">
+    <em>斜体2</em>
+    <strong class="wrapper2">
+        <em>斜体1</em>
+    </strong>
+</div>
+```
+
+7. 并列选择器
+可以把以上几种并列写，中间没有空格
+
+```html
+<!-- 并列选择器 -->
+    <div id="test">1</div>
+    <div class="test">2</div>
+    <p>3</p>
+```
+
+```css
+div.test {
+    background-color: chartreuse;
+}
+
+div#test {
+    background-color: royalblue;
+}
+```
+
+8. 分组选择器
+当多个共用一种样式时，可以用逗号隔开多个
+
+```css
+em,
+strong,
+del {
+    color: red;
+}
+```
+
+```html
+<em>logo1</em>
+<strong>logo2</strong>
+<del>logo3</del>
+```
+
+## css属性
+- font-size
+浏览器默认16px，但一般都是12px，14px。这个数值设置的是字体的高！
+
+- font-weight
+可以设置bold, lighter, bolder, normal, 100,200-900。但是能不能设置成功取得字体包。
+
+- font-style
+italic斜体。
+
+- font-family
+字体。arail字体是最常用的一个字体。
+
+- color
+字体颜色。没有font-color。只有color。有三种写法
+1. 土鳖式（英文单词）
+red，green等。
+
+2. 颜色代码
+r（红） g（绿） b（蓝）。比如ff4400或者f40
+
+3. 颜色函数
+rgb(0-255,0-255,0-255)
+
+- border
+给容器加一个外边框。能指定粗细(border-width)，展示形式(border-style)，颜色(border-color)。例如
+```css
+.demo {
+    border:10px solid black;
+}
+```
+border-style有solid实心，dotted点状，dashed条状虚线。
+
+- border-left
+- border-top
+- border-bottom
+- border-right

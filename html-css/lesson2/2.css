@@ -16,6 +16,38 @@
     color: #f40;
 }
 
-span {
+div span {
     color: blueviolet;
+}
+
+.wrapper .wrapper2 em {
+    background-color: brown;
+}
+
+div > em {
+    background-color: cadetblue;
+}
+
+div.test {
+    background-color: chartreuse;
+}
+
+div#test {
+    background-color: royalblue;
+}
+
+em,
+strong,
+del {
+    color: red;
+}
+
+.hello {
+    width: 100px;
+    height: 100px;
+    font-size: 14px;
+    font-weight: lighter;
+    color: #f40;
+    border: 10px dashed blue;
+    border-left-color: red;
 }
