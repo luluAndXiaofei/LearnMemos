@@ -604,3 +604,6 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
   </div>
 </template>
 ```
+
+---
+## 第十节-完成首页

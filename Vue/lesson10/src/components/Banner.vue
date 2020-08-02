@@ -1,15 +1,11 @@
 <template>
   <div class="banner-container" @mouseenter="autoStop" @mouseleave="autoStart">
-    <!-- <ul class="images" style="width:300%"> -->
     <ul class="images" :style="styleObject">
       <li v-for="(item, i) in banners" :key="i">
         <a :href="item.link"><img :src="item.url" alt="" /></a>
       </li>
     </ul>
     <ul class="dots">
-      <!-- <li class="active"></li>
-      <li></li>
-      <li></li> -->
       <li
         v-for="(item, i) in banners"
         :key="i"
