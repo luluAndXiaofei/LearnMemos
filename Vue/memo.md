@@ -607,3 +607,13 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 
 ---
 ## 第十节-完成首页
+---
+
+## 前十节练习， 查缺补漏
+- 全局css需要在main.js中导入
+- a标签中放入img标签，可以实现图片的跳转
+- props相当于组件的外部属性。类似于html标签的属性
+- computed是一个属性，放回一个function作为该属性的“getter 函数“供vue调用。
+- css的属性必须用驼峰形式！！比如marginLeft,写margin-left会通不过编译！！！！！
+- 清除定时器 clearInterval()
+- class属性的绑定，是绑定一个实例，实例中属性值为true则代表生效。
