@@ -2,12 +2,14 @@
   <div style="width:1080px; margin:0 auto">
       <Banner :banners="images" />
       <Channels />
+      <News />
     </div>
 </template>
 
 <script>
 import Banner from "../components/Banner";
 import Channels from "../components/news/Channels"
+import News from "../components/news/NewsList"
 
 export default {
   data() {
@@ -23,6 +25,7 @@ export default {
   components: {
     Banner,
     Channels,
+    News,
   },
 }
 </script>

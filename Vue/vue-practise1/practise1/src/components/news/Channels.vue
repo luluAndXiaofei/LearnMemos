@@ -2,13 +2,16 @@
   <div class="news-types">
     <div
       class="item"
-      v-for="(item, i) in channels"
+      v-for="(item, i) in showChannels"
       :key="i"
       @click="changeChannelId(item.id)"
       :class="{ active: item.id == showId }"
     >
       <span class="name">{{ item.name }}</span>
     </div>
+    <a href="" @click.prevent="opened = !opened">{{
+      opened == false ? "展开" : "收起"
+    }}</a>
   </div>
 </template>
 
@@ -20,6 +23,7 @@ export default {
     return {
       channels: [],
       showId: null,
+      opened: true,
     };
   },
 
@@ -35,6 +39,16 @@ export default {
       this.showId = id;
       this.$emit("changeChannel", id);
     },
+  },
+  computed: {
+    showChannels() {
+      if (this.opened) {
+        return this.channels.slice(0, 8);
+      } else {
+        return this.channels;
+      }
+    },
+
   },
 };
 </script>
