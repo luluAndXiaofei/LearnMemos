@@ -33,6 +33,7 @@ export default {
     changeChannelId(id) {
       console.log(id);
       this.showId = id;
+      this.$emit("changeChannel", id);
     },
   },
 };
