@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <div style="width:1080px; margin:0 auto">
-      <Banner :banners="banners" />
-    </div>
+    <Home />
   </div>
 </template>
 
 <script>
-import Banner from "./components/Banner";
+import Home from "./pages/Home";
 
 export default {
   components: {
-    Banner,
+    Home,
   },
   data() {
     return {
