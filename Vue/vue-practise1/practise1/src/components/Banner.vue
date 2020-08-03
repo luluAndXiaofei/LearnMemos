@@ -56,15 +56,14 @@ export default {
       if (this.timer) {
         return;
       }
-
       this.timer = setInterval(() => {
-        this.index = (1 + this.index) % this.banners.length;
+        this.index = (this.index + 1) % this.banners.length;
       }, 3000);
     },
 
     autoStop() {
       clearInterval(this.timer);
-      this.time = null;
+      this.timer = null;
     },
   },
 };
