@@ -302,6 +302,18 @@ del {
 }
 ```
 
+9. 伪类选择器
+
+```css
+.baidu:hover{
+    width: 100px;
+    height: 100px;
+    background-color: burlywood;
+}
+```
+
+
+
 ```html
 <em>logo1</em>
 <strong>logo2</strong>
@@ -345,3 +357,26 @@ border-style有solid实心，dotted点状，dashed条状虚线。
 - border-top
 - border-bottom
 - border-right
+
+- text-align
+文本对齐方式。left center right
+
+- line-height
+文本高度。line-height=height可以实现垂直居中。
+
+- text-indent
+首行缩进。text-indent:2em,就是缩进2个字符。1em等于1 font-size=16px
+
+- text-decoration
+文本装饰。
+1. line-through代表删除线。
+2. none代表没有线。
+3. underline: 下划线
+4. overilne：上划线
+
+- cursor
+光标样式。
+
+1. pointer：小手
+2. help：问号
+3. copy：拷贝

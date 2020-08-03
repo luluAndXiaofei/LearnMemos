@@ -50,4 +50,13 @@ del {
     color: #f40;
     border: 10px dashed blue;
     border-left-color: red;
+    text-align: center;
+    line-height: 100px;
+    text-decoration:underline;
+}
+
+.baidu:hover{
+    width: 100px;
+    height: 100px;
+    background-color: burlywood;
 }
