@@ -640,3 +640,10 @@ this.$emit("changeChannel", id);
 ```
 - @事件时，后面指定“函数名”，而不是"函数名()"，不能带括号。参数在回调函数那里指定
 
+---
+## 第十一节 vue-router
+
+### tips：快速写元素
+```html
+li*5>a>lorem1
+```

@@ -73,7 +73,26 @@ title标签，浏览器的特性等。
 - start="2" : 从几开始排
 
 ## ul li标签
-无序列表。
+无序列表。ul li可以实现各种各样的父子结构。例如导航栏。
+- type="square"：方块
+- type="circle"：圆圈
+
+如果设置没有圈，需要以下css。
+
+```css
+ul {
+    list-style: none;
+}
+```
+
+如果让li的元素横过来，需要以下css
+
+```css
+li {
+    float: left;
+}
+```
+
 
 
 ## tips
