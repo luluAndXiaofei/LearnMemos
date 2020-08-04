@@ -619,6 +619,8 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 - 清除定时器 clearInterval()
 - class属性的绑定，是绑定一个实例，实例中属性值为true则代表生效。
 - 触发事件$emit(事件名, 事件参数); 触发时，设置外部的回调函数即可。
+- 给props的属性赋默认值时，使用default属性
+- 给props的属性赋默认值时，Object/Array类型不能直接定义空对象或空数组，必须使用 工厂函数 return 回一个默认值。
 
 ```js
 this.$emit("changeChannel", id);

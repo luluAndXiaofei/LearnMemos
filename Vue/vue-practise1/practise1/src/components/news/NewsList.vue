@@ -1,38 +1,33 @@
 <template>
   <div>
     <div class="news-item-normal" v-for="(item, i) in news" :key="i">
-      <div class="image"></div>
+      <div class="image">
+        <a :href="item.link" v-show="item.havePic">
+          <img :src="item.img" alt="" />
+        </a>
+      </div>
       <div class="word">
-        <h2 class="title">123</h2>
+        <h2 class="title">{{ item.title }}</h2>
       </div>
       <div class="aside">
-        <span>123</span>
-        <span>456</span>
-        <span>789</span>
+        <span>{{ item.name }}</span>
+        <span>发布日期：{{ item.putDate }}</span>
+        <span>来源：{{ item.source }}</span>
       </div>
-      <div class="content">456</div>
+      <div class="content">{{ item.content }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import {getNews} from "../../service/newsSevice";
-
 export default {
-
-  data() {
-    return {
-      news: [],
-    }
+  props: {
+    news: {
+      type: Array,
+      default: () => [],
+    },
   },
-
-  async created() {
-    var data = await getNews();
-    this.news = data;
-  },
-
-
-}
+};
 </script>
 
 <style>
