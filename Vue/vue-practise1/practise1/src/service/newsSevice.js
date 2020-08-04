@@ -5,7 +5,11 @@ export async function getNewsChannels() {
     return res.data;
 }
 
-export async function getNews() {
-    var res = await axios.get("news.json");
+export async function getNews(id) {
+    var jsonData = "news2.json";
+    if (id % 2 == 0) {
+        jsonData = "news.json";
+    }
+    var res = await axios.get(jsonData);
     return res.data;
 }

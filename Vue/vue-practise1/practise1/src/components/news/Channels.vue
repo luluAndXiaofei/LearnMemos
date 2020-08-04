@@ -30,12 +30,11 @@ export default {
   async created() {
     this.channels = await getNewsChannels();
     console.log(this.channels);
-    this.showId = this.channels[0].id;
+    this.changeChannelId(this.channels[0].id);
   },
 
   methods: {
     changeChannelId(id) {
-      console.log(id);
       this.showId = id;
       this.$emit("changeChannel", id);
     },

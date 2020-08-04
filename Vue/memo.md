@@ -621,6 +621,7 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 - 触发事件$emit(事件名, 事件参数); 触发时，设置外部的回调函数即可。
 - 给props的属性赋默认值时，使用default属性
 - 给props的属性赋默认值时，Object/Array类型不能直接定义空对象或空数组，必须使用 工厂函数 return 回一个默认值。
+- @事件时，后面指定“函数名”，而不是"函数名()"，不能带括号。参数在回调函数那里指定
 
 ```js
 this.$emit("changeChannel", id);
