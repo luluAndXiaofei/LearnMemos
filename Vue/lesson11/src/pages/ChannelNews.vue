@@ -5,12 +5,16 @@
 </template>
 
 <script>
-import Center from "./Center";
+import Center from "@/components/Center";
 
 export default {
     components: {
         Center,
-    }
+    },
+
+    created() {
+        console.log(this.$route.params.channelId);
+    },
 }
 </script>
 

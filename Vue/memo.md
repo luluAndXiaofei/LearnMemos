@@ -647,3 +647,40 @@ this.$emit("changeChannel", id);
 ```html
 li*5>a>lorem1
 ```
+
+### 访问不同路径的页面
+在html中，不管访问哪个页面都是访问的index.html。vue.js根据不同的路径，渲染不同的页面。用户看到的页面的切换，实际上是组件的切换。这种应用称之为单页应用。
+
+### vue-router
+- 首先安装
+```shell
+$npm install vue-router
+```
+
+- 导入并安装
+main.js中导入并安装。
+
+```js
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
+```
+
+- 创建并配置路由对象
+```js
+new Vue({
+  render: (h) => h(App),
+  router: router,
+}).$mount("#app");
+```
+
+- 使用路由。router-view会根据不同页面使用不同的组件。
+```html
+<div class="container">
+    <router-view />
+</div>
+```
+
+- tips。路由模式
+1. hash模式：来自于#后面的值。
+2. history：路径来自于真实的地址路径。
+3. abstract：路径来自于内存

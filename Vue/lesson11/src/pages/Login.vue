@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Center from "./Center";
+import Center from "@/components/Center";
 
 export default {
     components: {
