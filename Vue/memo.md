@@ -684,3 +684,32 @@ new Vue({
 1. hash模式：来自于#后面的值。
 2. history：路径来自于真实的地址路径。
 3. abstract：路径来自于内存
+
+- 路由的配置例子
+```js
+export default {
+  mode: "history",
+  routes: [
+    {
+      path: "/",
+      component: () => import("@/pages/Home"),
+    },
+    {
+      path: "/login",
+      component: () => import("@/pages/Login"),
+    },
+    {
+      path: "/reg",
+      component: () => import("@/pages/Reg"),
+    },
+    {
+      path: "/channel/:channelId",
+      component: () => import("@/pages/ChannelNews"),
+    },
+    {
+      path: "*",
+      component: () => import("@/pages/NotFound"),
+    },
+  ],
+};
+```
