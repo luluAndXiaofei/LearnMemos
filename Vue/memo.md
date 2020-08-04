@@ -613,16 +613,24 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 - 全局css需要在main.js中导入
 - a标签中放入img标签，可以实现图片的跳转
 - props相当于组件的外部属性。类似于html标签的属性
+- 给props的属性赋默认值时，使用default属性
+- 给props的属性赋默认值时，Object/Array类型不能直接定义空对象或空数组，必须使用 工厂函数 return 回一个默认值。
+- props可以自定义函数进行数据校验
+```js
+// 自定义验证函数
+propF: {
+  validator: function (value) {
+    // 这个值必须匹配下列字符串中的一个
+    return ['success', 'warning', 'danger'].indexOf(value) !== -1
+  }
+}
+```
 - computed是一个属性，放回一个function作为该属性的“getter 函数“供vue调用。使用时也是当作变量使用！
 - 根据渲染方式不同而变化的数据，应该放在计算属性里！！！
 - css的属性必须用驼峰形式！！比如marginLeft,写margin-left会通不过编译！！！！！
 - 清除定时器 clearInterval()
 - class属性的绑定，是绑定一个实例，实例中属性值为true则代表生效。
 - 触发事件$emit(事件名, 事件参数); 触发时，设置外部的回调函数即可。
-- 给props的属性赋默认值时，使用default属性
-- 给props的属性赋默认值时，Object/Array类型不能直接定义空对象或空数组，必须使用 工厂函数 return 回一个默认值。
-- @事件时，后面指定“函数名”，而不是"函数名()"，不能带括号。参数在回调函数那里指定
-
 ```js
 this.$emit("changeChannel", id);
 ```
@@ -630,3 +638,5 @@ this.$emit("changeChannel", id);
 ```html
 <Channels @changeChannel="handleChange" />
 ```
+- @事件时，后面指定“函数名”，而不是"函数名()"，不能带括号。参数在回调函数那里指定
+

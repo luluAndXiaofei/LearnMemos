@@ -2,7 +2,8 @@
   <div style="width:1080px; margin:0 auto">
     <Banner :banners="images" />
     <Channels @changeChannel="onHannelChange" />
-    <News :news="news" />
+    <News :news="news" v-show="!isLoading"/>
+    <Loading v-show="isLoading" />
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import Banner from "../components/Banner";
 import Channels from "../components/news/Channels";
 import News from "../components/news/NewsList";
 import { getNews } from "../service/newsSevice";
+import Loading from "../components/Loading";
 
 export default {
   data() {
@@ -21,6 +23,7 @@ export default {
         { url: require("../assets/banner/banner3.jpeg") },
       ],
       news: [],
+      isLoading: false,
     };
   },
 
@@ -28,12 +31,15 @@ export default {
     Banner,
     Channels,
     News,
+    Loading,
   },
 
   methods: {
     async onHannelChange(id) {
+      this.isLoading = true;
       console.log(id);
       this.news = await getNews(id);
+      this.isLoading = false;
     },
   },
 };
