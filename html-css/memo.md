@@ -322,13 +322,18 @@ del {
 ```
 
 9. 伪类选择器
-
+CSS伪类是用来添加一些选择器的特殊效果。
 ```css
 .baidu:hover{
     width: 100px;
     height: 100px;
     background-color: burlywood;
 }
+
+a:link {color:#FF0000;} /* 未访问的链接 */
+a:visited {color:#00FF00;} /* 已访问的链接 */
+a:hover {color:#FF00FF;} /* 鼠标划过链接 */
+a:active {color:#0000FF;} /* 已选中的链接 */
 ```
 
 
@@ -399,3 +404,52 @@ border-style有solid实心，dotted点状，dashed条状虚线。
 1. pointer：小手
 2. help：问号
 3. copy：拷贝
+
+
+### 总结
+#### 行级元素 inline
+比如span strong em a del
+1. 内容决定元素所占位置大小(不占满一行)
+2. 不可以通过css改变宽高
+
+
+#### 块级元素 block
+比如div p ul li ol form address
+1. 独占一行(占满一行)
+2. 可以通过css改变宽高
+
+#### 行级块元素 inline-block
+1. 内容决定元素所占位置大小(不占满一行)
+2. 可以通过css改变宽高
+
+#### 隐藏css属性
+- 上述行级元素，块级元素，行级块元素都有隐式属性`display`
+
+```css
+span {
+    display: inline;
+}
+
+div {
+    display: block;
+}
+
+img {
+    display: inline-block;
+}
+```
+
+- 凡是带inline属性的，都有文字特性
+```html
+<img src="fy.jpg">
+<img src="fy.jpg">
+<img src="fy.jpg">
+<img src="fy.jpg">
+```
+上述写法，默认每张图后面都有空格。所以图片之间会有间隙。正确写法如下
+```html
+<img src="fy.jpg"><img src="fy.jpg"><img src="fy.jpg"><img src="fy.jpg">
+```
+
+
+- 编程思想：先确定css功能，写完css，再写html
