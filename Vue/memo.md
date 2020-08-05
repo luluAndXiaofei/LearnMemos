@@ -713,3 +713,44 @@ export default {
   ],
 };
 ```
+
+### 路由路径时动态路径需要传递参数
+1. 设置动态路径，使用冒号+参数名
+```js
+{
+  path: "/channel/:channelId",
+  component: () => import("@/pages/ChannelNews"),
+},
+```
+2. 使用$route.params.参数获取
+```html
+<Center>
+      某个频道的主页{{$route.params.channelId}}
+  </Center>
+```
+3. 传递参数
+```html
+<router-link :to="{ name: 'Channel', params: { channelId: item.id } }" />
+```
+
+---
+## 第十二节 页面导航
+
+声明式导航:router-link
+```html
+<router-link to="/login">登陆</router-link>
+```
+或者动态的设置name
+```html
+<router-link :to="{name: 'Home'}">
+```
+在路由配置中添加name
+```js
+routes: [
+    {
+      path: "/",
+      name: "Home",
+      component: () => import("@/pages/Home"),
+    },
+]
+```
