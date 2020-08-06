@@ -18,6 +18,38 @@
       @click.prevent="handleChange(page - 1)"
       >上一页</a
     >
+
+    <a
+      href=""
+      class="pager-item"
+      :class="{ active: n == page }"
+      v-for="n in numbers"
+      :key="n"
+      @click.prevent="handleChange(n)"
+    >
+      {{ n }}
+    </a>
+
+    <a
+      href=""
+      class="pager-item"
+      :class="{
+        disabled: page == pageNumber,
+      }"
+      @click.prevent="handleChange(page + 1)"
+      >下一页</a
+    >
+
+    <a
+      href=""
+      class="pager-item"
+      :class="{
+        disabled: page == pageNumber,
+      }"
+      @click.prevent="handleChange(pageNumber)"
+      >尾页</a
+    >
+
     <span class="pager-text">
       <i> {{ page }} </i>/
       <i>{{ pageNumber }}</i>
@@ -50,6 +82,30 @@ export default {
     pageNumber() {
       return Math.ceil(this.total / this.limit);
     },
+    minNumber() {
+      var n = this.page - this.panelNumber / 2;
+      if (n < 1) {
+        n = 1;
+      }
+
+      return n;
+    },
+    maxNumber() {
+      var n = this.minNumber + this.panelNumber - 1;
+      if (n > this.pageNumber) {
+        n = this.pageNumber;
+      }
+
+      return n;
+    },
+    numbers() {
+      var nums = [];
+      for (var i = this.minNumber; i <= this.maxNumber; i++) {
+        nums.push(i);
+      }
+
+      return nums;
+    },
   },
 
   methods: {
@@ -60,7 +116,7 @@ export default {
         newPage = this.pageNumber;
       }
       if (newPage == this.page) {
-          return;
+        return;
       }
       this.$emit("pageChange", newPage);
     },

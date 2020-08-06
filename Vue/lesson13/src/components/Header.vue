@@ -35,7 +35,10 @@ export default {
   },
 
   async created() {
+    console.log("Header created");
     this.channels = await getNewsChannles();
+    console.log(`channels:${this.channels}`);
+
   },
 };
 </script>

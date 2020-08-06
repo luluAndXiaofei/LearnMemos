@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export async function getNewsChannles() {
-    var res = await axios.get("newsChannels.json");
+    console.log("getNewsChannles start");
+    var res = await axios.get("/newsChannels.json");
     return res.data;
 }
 

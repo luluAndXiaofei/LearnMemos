@@ -21,6 +21,7 @@ export default {
   methods: {
       handleChange(newPage) {
           this.page = newPage;
+          console.log(this.page);
       }
   }
 };
