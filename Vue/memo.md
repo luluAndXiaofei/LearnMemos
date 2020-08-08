@@ -673,7 +673,7 @@ new Vue({
 }).$mount("#app");
 ```
 
-- 使用路由。router-view会根据不同页面使用不同的组件。
+- 使用路由。`router-view`会渲染路径匹配到的视图组件。
 ```html
 <div class="container">
     <router-view />
@@ -725,26 +725,30 @@ export default {
 2. 使用$route.params.参数获取
 ```html
 <Center>
-      某个频道的主页{{$route.params.channelId}}
-  </Center>
+    某个频道的主页{{$route.params.channelId}}
+</Center>
 ```
-3. 传递参数
-```html
-<router-link :to="{ name: 'Channel', params: { channelId: item.id } }" />
-```
+
 
 ---
 ## 第十二节 页面导航
 
-声明式导航:router-link
+### 声明式导航
+`router-link`。默认渲染成`<a>`标签。当被点击后，内部会立刻把 to 的值传到 `router.push()`。
 ```html
 <router-link to="/login">登陆</router-link>
 ```
-或者动态的设置name
+或者动态的设置`name`。这个name就是router的config中设置的name。
 ```html
 <router-link :to="{name: 'Home'}">
 ```
-在路由配置中添加name
+### 传递参数
+路径参数:`params`。请求参数:`query`。
+```html
+<router-link :to="{ name: 'Channel', params: { channelId: item.id } ,query: {page: 1}}}" />
+```
+
+在路由配置中添加`name`
 ```js
 routes: [
     {
@@ -757,3 +761,40 @@ routes: [
 
 ---
 ## 第十三节 开发页码组件
+
+---
+## 第十四节 完成频道新闻页
+### 组件不重新渲染时，需要监控数据的变化,一旦变化就做某些事。
+```js
+watch: {
+  "$route.params.channelId": {
+    immediate: true,// 一开始的数据也要当作是一种变化
+    hanlder(newId, oldId) {
+      console.log(newId, oldId);
+    }
+  }
+}
+```
+
+### $route跟$router
+$route是匹配到的当前的页面信息。$router是帮助我们跳转页面的。
+
+### 命令式导航
+跳转到首页
+```js
+this.$router.push("/");
+```
+跳转到当前页面
+```js
+this.$router.push("?page="+newPage);
+```
+或者用传输对象的方式。省略name，params的话使用当前路径。
+```js
+this.$router.push({
+  // name: "Channel",
+  // params: this.$route.params.channelId,
+  query: {
+    page: newPage,
+  },
+});
+```
