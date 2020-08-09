@@ -1,0 +1,31 @@
+version: '3'
+services:
+  redis1:
+    image: redis
+    ports:
+      - "6379:6379"
+    container_name: "redis1"
+    networks: 
+      - dev
+  mysql1:
+    image: centos/mysql-57-centos7
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    ports: 
+      - "3306:3306"
+    container_name: "mysql1"
+    networks: 
+      - dev
+  web1:
+    image: tomcat
+    ports: 
+      - "9090:8080"
+    container_name: "web1"
+    networks: 
+      - dev
+      - pro
+networks:
+  dev:
+    driver: bridge
+  pro:
+    driver: bridge
