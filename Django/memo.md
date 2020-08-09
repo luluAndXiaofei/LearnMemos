@@ -199,3 +199,53 @@ def author_detail(request):
     text = f"作者的id是{author_id}"
     return HttpResponse(text)
 ```
+
+
+# 【URL与视图】url命名与反转url
+## 多个app的url控制
+可以在app根目录下自己创建`urls.py`。然后在项目的根目录下的`urls.py`中使用`include`函数引用各个app的url配置。
+
+
+```python
+# 使用include("应用名.urls")引用各个应用的urls
+urlpatterns = [
+    path('', include("front.urls")),
+    path('cms/', include("cms.urls")),
+]
+```
+
+## 页面跳转
+使用`redirect`函数。
+```python
+redirect("/login")
+```
+
+## url命名
+因为url经常变化，所以可以给url起个名字，这样直接使用名字，就可以不用写死了。
+
+```python
+urlpatterns = [
+    path("", views.index, name="index"),
+    path("login/", views.login, name="login"),
+]
+```
+
+## 反转url
+url命名不能直接在views中使用，需要反转函数`reverse`
+```python
+return redirect(reverse("login"))
+```
+
+## 应用命名空间
+应用命名空间叫做`app_name`。使用命名空间可以避免反转时产生混淆。
+
+
+urls.py
+```python
+app_name="front"
+```
+
+views.py
+```python
+return redirect(reverse("front:login"))
+```

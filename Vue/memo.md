@@ -748,7 +748,8 @@ export default {
 <router-link :to="{ name: 'Channel', params: { channelId: item.id } ,query: {page: 1}}}" />
 ```
 
-在路由配置中添加`name`
+### url命名
+在路由配置中添加`name`，可以避免url改变而重复修改引用。
 ```js
 routes: [
     {
