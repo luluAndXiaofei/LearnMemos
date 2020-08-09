@@ -145,3 +145,57 @@ urlpatterns = [
     path('book/', views.book),
 ]
 ```
+
+### 首页映射
+django默认添加"/"，所以path('', admin.site.urls)就代表"/"
+```python
+urlpatterns = [
+    path('', admin.site.urls),
+]
+```
+
+# 【URL与视图】url中传递参数给视图函数
+
+## 1.传递路径参数
+传递路径参数使用<变量名>的方式，且views中的形参必须使用同样的变量名
+
+```python
+urlpatterns = [
+    path('book/detail/<book_id>/', views.book_detail),
+]
+```
+
+```python
+# book_id使用urls.py中同样的变量名
+def book_detail(request, book_id):
+    return HttpResponse(f"图书详情:{book_id}")
+```
+
+而且路径参数可以多级，比如
+
+```python
+urlpatterns = [
+    path('book/detail/<book_id>/<category_id>/', views.book_detail),
+]
+```
+
+```python
+def book_detail(request, book_id, category_id):
+    return HttpResponse(f"book_id:{book_id},category_id:{category_id}")
+```
+
+## 2. 传递请求参数
+传递路径参数时，?=的部分不需要写在urls中，在views中通过`request.GET.get("参数名")`获取。或者`request.GET['id']`
+
+```python
+urlpatterns = [
+    path('book/author/', views.author_detail),
+]
+```
+
+```python
+def author_detail(request):
+    author_id = request.GET.get("id")
+    text = f"作者的id是{author_id}"
+    return HttpResponse(text)
+```
