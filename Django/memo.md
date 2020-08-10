@@ -249,3 +249,6 @@ views.py
 ```python
 return redirect(reverse("front:login"))
 ```
+
+# 【Django模版】模版介绍
+DTL跟Jinja2是最主流的模版，DTL是Djnago的内置模版。DTL模版是带特殊语法的HTML文件，可以传递参数，实现数据动态化，在编译完成后生成普通HTML文件，然后传给客户端。
