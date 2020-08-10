@@ -766,15 +766,26 @@ routes: [
 ---
 ## 第十四节 完成频道新闻页
 ### 组件不重新渲染时，需要监控数据的变化,一旦变化就做某些事。
+`watch`有两种写法。第一是对属性直接设置监控方法。
 ```js
 watch: {
-  "$route.params.channelId": {
-    immediate: true,// 一开始的数据也要当作是一种变化
-    hanlder(newId, oldId) {
-      console.log(newId, oldId);
-    }
+  data: function {
+      return "data changed."
   }
 }
+```
+第二种是配置一个对象，`handler()`是监控方法。这种方法的好处是可以设置`immediate`使数据一开始没有变化也触发handler方法。
+```js
+watch: {
+  data: {
+    immediate: true,
+    handler() {
+      if (this.data.length > 0) {
+        this.changeChannelId(this.data[0].id);
+      }
+    },
+  },
+},
 ```
 
 ### $route跟$router
@@ -798,4 +809,155 @@ this.$router.push({
     page: newPage,
   },
 });
+```
+
+---
+## 第十五节 处理共享数据
+跨越多个组件的共享数据，会产生两个问题，一是多个组件如何共享同一份数据，二是数据变化如何通知其他的组件。vuex专门用于解决数据共享问题，也是将数据提升到顶层，不过它使用了一些特别的技巧，使组件的依赖更加清晰，当数据变化时，仅渲染依赖该数据的组件。
+
+### 安装vuex
+```shell
+npm install vuex
+```
+
+### 导入vuex
+`vuex.Store`用于创建一个仓库对象。一个vue程序对应一个仓库，存储所有仓库数据。创建并配置vuex分为以下三步
+
+#### 1. 创建vuex的仓库对象
+```js
+var store = new vuex.Store({
+  // 配置
+});
+```
+
+#### 2. vue中使用vuex
+```js
+Vue.use(vuex)
+```
+
+#### 3. vue中配置vuex
+```js
+new Vue({
+  render: (h) => h(App),
+  router,
+  store,
+}).$mount("#app");
+```
+
+### vuex中配置共享数据
+使用`modules`可以配置合并多个对象。对象中需要含有`state`属性。
+```js
+var store = new vuex.Store({
+  // 配置
+  modules: {
+    channels,
+    loginUser,
+  },
+});
+```
+channels对象
+```js
+export default {
+  state: {
+    data: [],
+    isLoading: false,
+  },
+};
+```
+loginUser对象
+```js
+export default {
+  state: {
+    data: null,
+    isLoading: false,
+  },
+};
+```
+### 共享数据开启命名空间
+开启命名空间，可以区分重复命名的多个属性。比如多个属性叫做data，isLoading。可以通过命名空间来区分。
+```js
+export default {
+  namespaced: true,
+  state: {
+    data: [],
+    isLoading: false,
+  },
+};
+```
+
+### es6展开属性写法
+使用`...对象`即可把对象的全部属性拿过来。
+
+```js
+var obj = {
+  a : 1,
+  b : 2,
+};
+
+var newObj = {
+  ...obj,
+  c: 3,
+}
+```
+
+### 从vuex的state中拿到共享数据
+方法1：使用`$store.state`
+```js
+$store.state.channels.data
+$store.state.channels.isLoading
+```
+方法2:使用`mapState`辅助函数
+参数1: 数据模块名，参数2: 数据属性名的数组
+```js
+var result = mapState("channels", ["data", "isLoading"]);
+```
+
+### 改动共享数据
+必须使用`$store`,`commit`一个`mutations`配置多种变异方式。在vuex中，提交`mutations`是数据变化的**唯一原因**。
+```js
+this.$store.commit("channels/setIsLoading", true)
+```
+```js
+mutations: {
+    setData(state, payload) {
+      state.data = payload;
+    },
+
+    setIsLoading(state, payload) {
+      state.isLoading = payload;
+    }
+  }
+```
+注意！在`mutations`中不能出现副作用操作，比如以下
+- 改动或使用外部的数据
+- ajax
+- localstorage
+- 其他异步行为（setInterval等）
+
+
+### 使用action提交副作用操作
+如果需要副作用的操作，使用`actions`。第一个参数`context`代表`$store`。所以使用`context.commit`可以提交`mutations`。如果有payload可以设置第二个参数接收。
+
+```js
+async fetchData(context) {
+    // 这里提交就是自己，所以不需要命名空间
+    context.commit("setIsLoading", true);
+    var channels = await getNewsChannles();
+    context.commit("setData", channels);
+    context.commit("setIsLoading", false);
+  }
+```
+
+### 分发action
+在需要调用action的地方`dispatch`即可。如果是最开始就需要的共享数据，所以常用的做法是在main.js中`dispatch`统一拿到数据，在不同组件中通过`mapState`分别获取。
+```js
+store.dispatch("channels/fetchData");
+```
+
+```js
+export default {
+  computed: {
+    ...mapState("channels", ["data", "isLoading"])
+  },
+};
 ```
