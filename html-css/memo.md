@@ -291,7 +291,7 @@ div > em {
 </div>
 ```
 
-7. 并列选择器
+7. 并列选择器decoration
 可以把以上几种并列写，中间没有空格
 
 ```html
@@ -353,7 +353,7 @@ a:active {color:#0000FF;} /* 已选中的链接 */
 可以设置bold, lighter, bolder, normal, 100,200-900。但是能不能设置成功取得字体包。
 
 - font-style
-italic斜体。
+italic斜体,`em`标签相当于自带`font-style:italic`。而如果想自定义`em`标签不带斜体，则设置`font-style:normal`。
 
 - font-family
 字体。arail字体是最常用的一个字体。
@@ -393,7 +393,7 @@ border-style有solid实心，dotted点状，dashed条状虚线。
 首行缩进。text-indent:2em,就是缩进2个字符。1em等于1 font-size=16px
 
 - text-decoration
-文本装饰。
+文本装饰。比如`<a>`标签的下划线就是自带`underline`。但通常我们设置成`none`。
 1. line-through代表删除线。
 2. none代表没有线。
 3. underline: 下划线
@@ -405,6 +405,17 @@ border-style有solid实心，dotted点状，dashed条状虚线。
 1. pointer：小手
 2. help：问号
 3. copy：拷贝
+
+- opacity
+透明度。可以设置0~1的值。
+```css
+.demo {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    opacity: 0.5;
+}
+```
 
 
 ### 总结
@@ -454,3 +465,136 @@ img {
 
 
 - 编程思想：先确定css功能，写完css，再写html
+比如写如下css
+```css
+.red {
+    background-color: red;
+}
+.green {
+    background-color: green;
+}
+.grey {
+    background-color: grey;
+}
+.size1 {
+    width: 100px;
+    height: 100px;
+}
+.size2 {
+    width: 200px;
+    height: 200px;
+}
+.size3 {
+    width: 300px;
+    height: 300px;
+}
+```
+写如下html
+```html
+<div class="red size1"></div>
+<div class="green size2"></div>
+<div class="grey size3"></div>
+```
+
+### 自定义标签
+使用标签选择器，可以初始化标签，自定义标签
+```css
+ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+```
+使用通配符选择器初始化所有自带的元素。
+```css
+* {
+    padding: 0px;
+    margin: 0px; 
+}
+```
+
+### 盒子模型
+padding,margin,border,width,height。
+
+####  padding margin写法
+padding后写一个值跟写四个同样的值是一样的。分别代表上右下左。
+```css
+padding: 100px;
+padding: 100px 100px 100px 100px;
+```
+如果只写三个，则左右都是一样的值。
+```css
+padding: 10px 20px 30px;
+```
+如果只写两个是上下跟左右
+```css
+margin: 10px 20px;
+```
+
+#### border写法
+border也有四个方向，只写一个则四个方向相同
+```css
+div {
+    width: 100px;
+    height: 100px;
+    border: 10px 20px 30px 40px;
+}
+```
+
+### 绝对定位技术
+`position:absolute`跟`left`,`top`,`right`,`bottom`配合实现绝对位置。***最近的有定位的父级进行定位，如果没有，则相对于文档进行定位***。
+[参考例子](lesson2/position_absolute2.html)
+```css
+div {
+    position: absolute;
+    left:100px;
+    top: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border: 10px solid black;
+    padding: 10px 20px 30px;
+    margin: 10px 20px;
+}
+```
+
+### 层级模型
+指定`position:absolute`后，则脱离原来的位置进行定位。每一个`absolute`都是一个层。
+
+### 相对定位技术
+`postion:relative`跟absolute不同，是保留原来的位置进行定位。原来占用过的位置不会给别人。是相对于自己原来的位置定位(没有设置left，top之前的位置)。
+
+### 相对定位跟绝对定位
+一般用相对定位作为父级元素当作标杆(只设置relative，不设置left,top就没有任何影响)，定位使用绝对定位。
+
+### fixed定位
+`position:fixed`是固定在屏幕某一个位置，即使滚动条翻页也不动。
+
+### 居中定位
+相对于文档居中。left,top都设置为50%，代表相对于文档是文档的50%。在设置margin-left跟margin-top为负数。
+
+```css
+div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+```
+相对于可视窗口居中。固定设置为fixed。
+```css
+div {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+```

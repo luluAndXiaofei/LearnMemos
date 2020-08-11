@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>position_absolute</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      .position {
+        position: absolute;
+        left: 200px;
+        top: 200px;
+        width: 100px;
+        height: 100px;
+        background-color: greenyellow;
+        border: 10px solid black;
+        padding: 10px 20px 30px;
+        margin: 10px 20px;
+      }
+
+      .box {
+        width: 150px;
+        height: 150px;
+        background-color: green;
+      }
+
+      .demo {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="position">position</div>
+    <div class="demo">demo</div>
+    <div class="box">box</div>
+  </body>
+</html>
