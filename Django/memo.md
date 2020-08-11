@@ -185,7 +185,7 @@ def book_detail(request, book_id, category_id):
 ```
 
 ## 2. 传递请求参数
-传递路径参数时，?=的部分不需要写在urls中，在views中通过`request.GET.get("参数名")`获取。或者`request.GET['id']`
+传递路径参数时，?=的部分不需要写在urls中，在views中通过`request.GET.get("参数名")`获取。或者`request.GET['id']`。区别是前者即使不传参数会返回None，而后者会直接报错。
 
 ```python
 urlpatterns = [

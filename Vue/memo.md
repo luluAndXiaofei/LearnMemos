@@ -566,9 +566,35 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 ```
 
 ## this.$emit触发事件
+意思是一个组件的事件提供给外部回调，跟html中的事件是一样的。外部使用该组件的地方可以通过属性指定这个事件的回调方法。
 - 参数：
   - {string} eventName
   - [...args]
+
+组件内触发事件
+```js
+methods: {
+  changeChannelId(id) {
+    this.chooseId = id;
+    this.$emit("changeChannel", id);
+  },
+},
+```
+使用组件的地方进行回调
+```html
+<Channels @changeChannel="handleChange" />
+```
+```js
+methods: {
+  async handleChange(id) {
+    this.isLoading = true;
+    var res = await getNews(id);
+    console.log(res);
+    this.newsList = res;
+    this.isLoading = false;
+  },
+},
+```
 
 ---
 ## 第八节-开发新闻列表组件
@@ -821,7 +847,7 @@ npm install vuex
 ```
 
 ### 导入vuex
-`vuex.Store`用于创建一个仓库对象。一个vue程序对应一个仓库，存储所有仓库数据。创建并配置vuex分为以下三步
+全局变量`vuex.Store`用于创建一个仓库对象。一个vue程序对应一个仓库，存储所有仓库数据。创建并配置vuex分为以下三步
 
 #### 1. 创建vuex的仓库对象
 ```js
