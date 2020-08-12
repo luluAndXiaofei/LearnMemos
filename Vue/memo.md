@@ -987,3 +987,33 @@ export default {
   },
 };
 ```
+
+---
+## 第十六节 登录和注册接口
+
+### 跨域设置
+请求的主机地址，端口号等不一致时会被***浏览器**的通源策略拒绝，这被成为跨域问题。解决跨域问题需要前端代理。但是允不允许跨域，是看后台服务器的设置，服务器允许跨域，那前端又不需要做代理。注意，跨域是浏览器的策略，代理不通过浏览器，所以不会产生跨域问题。
+
+### 代理设置
+在项目根目录下创建`vue.config.js`(node.js的配置)。导出以下配置。
+
+```js
+module.exports = {
+    // vue的配置
+    devServer: {
+        proxy: {
+            "/api": {
+                target: "http://study.yuanjin.tech"
+            }
+        }
+    }
+}
+```
+
+## 保存令牌到localStorege
+```js
+var token = resp.headers.authorization; // 拿到服务器的令牌
+    if (token) {
+        localStorage.setItem("token", token);
+    }
+```
