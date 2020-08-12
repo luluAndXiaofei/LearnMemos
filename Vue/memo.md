@@ -1017,3 +1017,17 @@ var token = resp.headers.authorization; // 拿到服务器的令牌
         localStorage.setItem("token", token);
     }
 ```
+
+## 读取localStorege,删除localStorege
+```js
+localStorege.getItem("token");
+localStorege.removeItem("token");
+```
+
+## 第十七节  注册和登录页面
+
+### 监听input事件
+input标签的事件也叫做input。
+```js
+@input="validateEmpty('loginId', '账号不能为空')"
+```
