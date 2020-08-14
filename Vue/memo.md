@@ -531,6 +531,8 @@ Promise有三种状态，pending（进行中）、fulfilled（已成功）和rej
 
 > resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
 
+[不明白了就看这里复习](https://www.jianshu.com/p/b16e7c9e1f9f)
+
 ---
 ## 第七节-开发新闻类别组件
 
@@ -1030,4 +1032,28 @@ localStorege.removeItem("token");
 input标签的事件也叫做input。
 ```js
 @input="validateEmpty('loginId', '账号不能为空')"
+```
+
+## 第十八节  共享登陆数据
+
+### mapState避免计算属性重名
+mapState获取共享数据时，可以把第二个参数写成一个对象，属性名就是计算属性名可以自定义，值还是共享数据的变量名。
+```js
+computed: {
+  ...mapState("channels", ["data", "isLoading"]),
+  ...mapState("loginUser", {
+    loginUser: "data",
+    isLogin: "isLoading",
+  }),
+},
+```
+
+### `template`标签
+template在页面没有任何实际作用，不会显示什么东西。只会把多个元素组合在一起。
+
+```html
+<template>
+  <a href="">用户名</a>
+  <a href="">退出用户</a>
+</template>
 ```
