@@ -19,7 +19,7 @@ export async function login(loginInfo) {
 }
 
 export async function whoAmI() {
-
+  await delay(2000);
   var token = localStorage.getItem("token");
   if (!token) {
     return null;

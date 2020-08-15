@@ -23,7 +23,7 @@
         <div class="user">
           <span v-if="isLogin">loading...</span>
           <template v-else-if="loginUser">
-            <a href="">{{ loginUser.nickname }}</a>
+            <router-link :to="{name: 'Personal'}">{{ loginUser.nickname }}</router-link>
             <a href="" @click.prevent="handleLogout">退出用户</a>
           </template>
           <template v-else>

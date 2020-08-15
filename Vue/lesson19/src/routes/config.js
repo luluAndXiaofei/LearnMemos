@@ -30,6 +30,19 @@ export default {
       path: "/personal",
       name: "Personal",
       component: () => import("@/pages/Personal"),
+      meta: {
+        auth: true,
+      }
+    },
+    {
+      path: "/auth",
+      name: "Auth",
+      component: () => import("@/pages/Auth"),
+    },
+    {
+      path: "/protected",
+      name: "Protected",
+      component: () => import("@/pages/Protected"),
     },
   ],
 };

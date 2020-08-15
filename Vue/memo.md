@@ -1059,3 +1059,32 @@ template在页面没有任何实际作用，不会显示什么东西。只会把
 ```
 
 ## 第十九节  受保护的页面
+使用导航守卫，拦截路由配置。
+```js
+router.beforeEach(function(to, from, next) {
+    console.log("to: " , to);
+    console.log("from: " , from);
+    next();
+});
+```
+`meta`属性可以自由添加路由的额外数据。
+```js
+{
+  path: "/personal",
+  name: "Personal",
+  component: () => import("@/pages/Personal"),
+  meta: {
+    auth: true,
+  }
+},
+```
+这个属性可以被router拿到。
+```js
+router.beforeEach(function(to, from, next) {
+  if (to.meta.auth) {
+    next({ name: "Login" });
+  } else {
+    next();
+  }
+});
+```

@@ -31,10 +31,10 @@ export default {
     },
 
     async whoAmI(context) {
-      // context.commit("setIsLoading", true);
+      context.commit("setIsLoading", true);
       var res = await whoAmI();
       context.commit("setData", res);
-      // context.commit("setIsLoading", false);
+      context.commit("setIsLoading", false);
     },
 
     logout(context) {
