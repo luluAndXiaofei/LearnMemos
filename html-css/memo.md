@@ -598,3 +598,37 @@ div {
     margin-top: -50px;
 }
 ```
+
+## 两个经典bug
+### margin塌陷。垂直方向的margin，父子元素是结合到一起的。父子都设置margin-top，会取较大的值。
+[例子](lesson3/2bugs.html)
+
+### margin塌陷解决方法。block format context
+css把html中的每一个元素当成一个盒子，并且每一个盒子都有一套渲染规则。这是html中正常的规则。bfc则是让其中的几个盒子，或者一个盒子的规则改变。如何触发一个盒子的bfc。
+
+```css
+position: absolute;
+display: inline-block;
+float: left/right;
+overflow: hidden; /* 溢出部分隐藏 */
+```
+
+```
+BFC布局规则：
+
+　　　　1.内部的Box会在垂直方向，一个接一个地放置。
+
+　　　　2.BFC的区域不会与float box重叠
+
+　　　　3.内部的Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠，取这两个Box的margin中的较大值。
+
+　　　　4.计算BFC的高度时，浮动元素也参与计算。（清除浮动 haslayout）
+
+　　　　5.BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。
+```
+
+但是bfc会带来新的问题，上述四个方法，确认不会影响其他元素再选择使用。
+
+### margin合并。垂直方向的margin，兄弟元素是合并的，margin-top跟margin-bottom并不会同时生效。
+[例子](lesson3/2bugs-2.html)
+
