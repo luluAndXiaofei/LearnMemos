@@ -632,3 +632,29 @@ BFC布局规则：
 ### margin合并。垂直方向的margin，兄弟元素是合并的，margin-top跟margin-bottom并不会同时生效。
 [例子](lesson3/2bugs-2.html)
 
+### float left/right
+可以让块级元素并列显示。特殊效果：浮动元素产生了浮动流，所有产生了浮动流的元素，块级元素看不到他们，产生了bfc的元素和文本类属性以及文本都能看到他们。用父级元素包裹浮动元素，清除浮动流效果可以使用`clear: both`。
+
+#### 利用伪元素清除浮动
+伪元素有before跟after。平时是看不到但是存在的。可以通过css选择器选中并更改。更改时，必须指定content。其他的属性跟普通元素一样。以下是清除浮动效果的代码。
+```css
+.wrapper::after {
+    content:"";
+    clear: both;
+    display: block; # 需要先变成块级元素。
+
+}
+```
+
+#### 利用bfc清除浮动
+设置`float`或者`position: absolute;`。但是内部把元素转换成inline-block;
+```css
+.wrapper {
+    float: left;
+    position: absolute;
+}
+```
+
+#### 文字环绕图片的效果
+对img标签使用`float:left`。
+
