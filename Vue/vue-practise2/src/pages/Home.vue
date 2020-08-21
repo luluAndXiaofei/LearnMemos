@@ -1,5 +1,5 @@
 <template>
-  <div style="width:1080px; margin:0 auto">
+  <div>
     <Banner :banners="images" />
     <Channels @changeChannel="onHannelChange" />
     <News :news="news" v-show="!isLoading"/>

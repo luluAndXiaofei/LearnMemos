@@ -682,7 +682,7 @@ li*5>a>lorem1
 ### vue-router
 - 首先安装
 ```shell
-$npm install vue-router
+$ npm install vue-router
 ```
 
 - 导入并安装
@@ -1088,3 +1088,17 @@ router.beforeEach(function(to, from, next) {
   }
 });
 ```
+
+
+## 后十节练习， 查缺补漏
+- 图片资源放在asset下，通过相对路径引用
+- `<router-view />`是路由出口，路由匹配到的组件将渲染在这里。
+- 使用`router-link`组件来导航, 默认会被渲染成一个 `<a>` 标签
+- 使用路由需要的步骤
+0. 先安装，npm install vue-router
+1. 先确定路由出口，然后插入router-view渲染。
+2. Vue.use(VueRouter)导入路由。
+3. new一个VueRouter的实例。参数传入路由配置对象。
+4. 编写路由配置对象
+5. 在应该跳转的地方(导航栏之类)写上`router-link to`
+6. 将new的VueRouter实例传入Vue的根实例
