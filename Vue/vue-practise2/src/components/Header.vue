@@ -3,30 +3,21 @@
     <div class="header-container">
       <div class="container">
         <div class="logo">
-          <router-link to="/">
+          <router-link :to="{ name: 'home' }">
             <img src="../assets/logo.png" alt="" />
           </router-link>
         </div>
         <ul class="nav">
-          <li>
-            <a href="">1</a>
-          </li>
-          <li>
-            <a href="">2</a>
-          </li>
-          <li>
-            <a href="">3</a>
-          </li>
-          <li>
-            <a href="">4</a>
-          </li>
-          <li>
-            <a href="">5</a>
+          <li v-for="(item, i) in data.slice(0, 5)" :key="i">
+            <router-link
+              :to="{ name: 'channel', params: { channelId: item.id } }"
+              >{{ item.name }}</router-link
+            >
           </li>
         </ul>
         <div class="user">
-          <router-link to="/login">登陆</router-link>
-          <router-link to="/reg">注册</router-link>
+          <router-link :to="{ name: 'login' }">登陆</router-link>
+          <router-link :to="{ name: 'reg' }">注册</router-link>
         </div>
       </div>
     </div>
@@ -34,7 +25,13 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState("channels", ["data", "isLoading"]),
+  },
+};
 </script>
 
 <style scoped>

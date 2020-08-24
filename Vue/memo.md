@@ -1100,5 +1100,19 @@ router.beforeEach(function(to, from, next) {
 2. Vue.use(VueRouter)导入路由。
 3. new一个VueRouter的实例。参数传入路由配置对象。
 4. 编写路由配置对象
-5. 在应该跳转的地方(导航栏之类)写上`router-link to`
+5. 在应该跳转的地方(导航栏之类)写上`router-link to`。可以写路径，也可以写命名(name)。可以指定params参数。
 6. 将new的VueRouter实例传入Vue的根实例
+
+- 如果匹配不到的页面可以设置路由path*作为全局匹配
+- 路径参数使用`:参数`来声明
+- 使用该参数则访问`this.$route.params.参数名`
+
+- 使用vuex的步骤
+0. 先安装,npm install vuex
+1. new一个vuex.store的实例。参数传入`modules`对象
+2. `modules`对象可以由多个state共享数据组成，分别编写他们。编写state,namespaced等属性。
+3. Vue.use(vuex)导入vuex
+4. 将new的store实例传入Vue的根实例
+5. 使用共享数据使用this.$store.state.xxx或者使用`mapState`辅助函数
+6. 改动数据先定义mutations,然后通过$store.commit提交。
+7. 要支持异步操作只能使用actions，然后使用dispatch分发。
