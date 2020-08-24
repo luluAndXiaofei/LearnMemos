@@ -1113,6 +1113,11 @@ router.beforeEach(function(to, from, next) {
 2. `modules`对象可以由多个state共享数据组成，分别编写他们。编写state,namespaced等属性。
 3. Vue.use(vuex)导入vuex
 4. 将new的store实例传入Vue的根实例
-5. 使用共享数据使用this.$store.state.xxx或者使用`mapState`辅助函数
+5. 使用共享数据使用this.$store.state.xxx或者使用`mapState`辅助函数写到计算属性里！
 6. 改动数据先定义mutations,然后通过$store.commit提交。
 7. 要支持异步操作只能使用actions，然后使用dispatch分发。
+
+- 获取public下的文件使用绝对路径比较安全,以/开头。
+```js
+axios.get("/newsChannels.json")
+```

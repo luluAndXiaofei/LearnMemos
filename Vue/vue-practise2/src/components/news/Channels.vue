@@ -16,21 +16,14 @@
 </template>
 
 <script>
-import { getNewsChannels } from "../../service/newsSevice";
+import { mapState } from "vuex";
 
 export default {
   data() {
     return {
-      channels: [],
       showId: null,
       opened: true,
     };
-  },
-
-  async created() {
-    this.channels = await getNewsChannels();
-    console.log(this.channels);
-    this.changeChannelId(this.channels[0].id);
   },
 
   methods: {
@@ -39,16 +32,29 @@ export default {
       this.$emit("changeChannel", id);
     },
   },
+
   computed: {
     showChannels() {
       if (this.opened) {
-        return this.channels.slice(0, 8);
+        return this.data.slice(0, 8);
       } else {
-        return this.channels;
+        return this.data;
       }
     },
-
+    ...mapState("channels", ["data"]),
   },
+
+  watch: {
+    data: {
+      immediate: true,
+      handler() {
+        if (this.data.length > 0) {
+          this.changeChannelId(this.data[0].id);
+        }
+      }
+    }
+  }
+
 };
 </script>
 

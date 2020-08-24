@@ -37,7 +37,6 @@ export default {
   methods: {
     async onHannelChange(id) {
       this.isLoading = true;
-      console.log(id);
       this.news = await getNews(id);
       this.isLoading = false;
     },

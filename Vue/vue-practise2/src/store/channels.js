@@ -16,10 +16,10 @@ export default {
     },
   },
   actions: {
-    async fetchDatas(context) {
+    async fetchData(context) {
       context.commit("setIsLoading", true);
-      var data = await getNewsChannels();
-      context.commit("setData", data);
+      var channels = await getNewsChannels();
+      context.commit("setData", channels);
       context.commit("setIsLoading", false);
     },
   },
