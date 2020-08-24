@@ -5,6 +5,7 @@
     </div>
     <isLoading v-show="isLoading"/>
     <NewsList :news="news" />
+    <Pager />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import { mapState } from "vuex";
 import NewsList from "../components/news/NewsList";
 import {getNews} from "../service/newsSevice";
 import isLoading from "../components/Loading";
+import Pager from "../components/Pager";
 
 export default {
   data() {
@@ -42,6 +44,7 @@ export default {
   components: {
     NewsList,
     isLoading,
+    Pager,
   },
 
   watch: {
