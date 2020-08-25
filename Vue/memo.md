@@ -1121,3 +1121,7 @@ router.beforeEach(function(to, from, next) {
 ```js
 axios.get("/newsChannels.json")
 ```
+
+- props要么是数组，要么是对象。
+- methods中的方法可以设置参数。但是方法不能当作属性使用，属性需要使用计算属性
+- props是外部通知自己，this.$emit("事件名", 参数)则相反，是通知外部发生事件。
