@@ -10,7 +10,7 @@
         <ul class="nav">
           <li v-for="(item, i) in data.slice(0, 5)" :key="i">
             <router-link
-              :to="{ name: 'channel', params: { channelId: item.id } }"
+              :to="{ name: 'channel', params: { channelId: item.id }, query: { page: 1 }, }"
               >{{ item.name }}</router-link
             >
           </li>

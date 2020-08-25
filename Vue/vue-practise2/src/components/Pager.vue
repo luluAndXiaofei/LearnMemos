@@ -10,7 +10,7 @@
     <a
       href=""
       class="pager-item"
-      @click.prevent="handleChange(selected - 1)"
+      @click.prevent="handleChange(page - 1)"
       :class="{ disabled: isTop }"
       >上一页</a
     >
@@ -18,7 +18,7 @@
       href=""
       class="pager-item"
       @click.prevent="handleChange(item)"
-      :class="{ active: item == selected }"
+      :class="{ active: item == page }"
       v-for="(item, i) in pageItem"
       :key="i"
       >{{ item }}</a
@@ -26,7 +26,7 @@
     <a
       href=""
       class="pager-item"
-      @click.prevent="handleChange(selected + 1)"
+      @click.prevent="handleChange(page + 1)"
       :class="{ disabled: isLast }"
       >下一页</a
     >
@@ -45,19 +45,18 @@ export default {
   props: {
     total: {
       type: Number,
-      default: 10,
+      default: 0,
     },
 
     perPage: {
       type: Number,
       default: 1,
     },
-  },
 
-  data() {
-    return {
-      selected: 1,
-    };
+    page: {
+      type: Number,
+      default: 1,
+    }
   },
 
   computed: {
@@ -65,24 +64,26 @@ export default {
       return Math.ceil(this.total / this.perPage);
     },
     isTop() {
-      return this.selected == 1;
+      return this.page == 1;
     },
     isLast() {
-      return this.selected == this.total;
+      return this.page == this.pageItem;
     },
   },
 
   methods: {
-    handleChange(pageNum) {
-      if (pageNum <= 1) {
-        this.selected = 1;
-      } else if (pageNum >= this.total) {
-        this.selected = this.total;
-      } else {
-        this.selected = pageNum;
+    handleChange(newPage) {
+      if (newPage <= 1) {
+        newPage = 1;
+      } 
+      if (newPage >= this.pageItem) {
+        newPage = this.pageItem;
+      } 
+      if (newPage == this.page) {
+        return;
       }
 
-      this.$emit("pageChange", pageNum);
+      this.$emit("pageChange", newPage);
     }
   },
 };

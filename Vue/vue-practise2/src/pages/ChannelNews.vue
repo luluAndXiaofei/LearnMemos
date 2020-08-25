@@ -3,16 +3,21 @@
     <div class="type-title">
       {{ channelName }}
     </div>
-    <isLoading v-show="isLoading"/>
-    <NewsList :news="news" />
-    <Pager />
+    <isLoading v-if="isLoading" />
+    <NewsList v-else :news="news" />
+    <Pager
+      :total="news.length"
+      :perPage="5"
+      :page="page"
+      @pageChange="handleChange"
+    />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import NewsList from "../components/news/NewsList";
-import {getNews} from "../service/newsSevice";
+import { getNews } from "../service/newsSevice";
 import isLoading from "../components/Loading";
 import Pager from "../components/Pager";
 
@@ -34,11 +39,19 @@ export default {
       this.isLoading = true;
       this.news = await getNews(this.$route.params.channelId);
       this.isLoading = false;
-    }
+    },
+    handleChange(newPage) {
+      this.news.length;
+      this.setData();
+      this.$router.push({ query: { page: newPage } });
+    },
   },
 
   computed: {
     ...mapState("channels", ["data"]),
+    page() {
+      return +this.$route.query.page || 1;
+    },
   },
 
   components: {
