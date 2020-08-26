@@ -14,7 +14,7 @@
 ### docker pull + 镜像名
 拉取镜像
  
-### docker (container) run + docker名
+### docker (container) run + imageId
 创建并启动容器。结束后并不会销毁容器。除非添加`--rm`。另外如果本地没有docker名的image，会自动拉取。
 -  `--rm`:结束后销毁容器
 -  `--name`:给容器起名
@@ -34,6 +34,9 @@
  
 ### docker stop <容器 ID>
 关闭容器
+
+### docker rm <容器ID或者容器名>
+删除容器
 
 ## docker-compose
 Compose 是 Docker 公司推出的一个工具软件，可以管理多个 Docker 容器组成一个应用。你需要定义一个 YAML 格式的配置文件`docker-compose.yml`，写好多个容器之间的调用关系。docker-compose分为三层，分别是工程（project），服务（service），容器（container）。
