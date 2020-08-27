@@ -1,27 +1,43 @@
 <template>
   <Center>
-      <div class="login-container">
-        <div class="form-item">
-          <div class="input">
-            <label for="">账号：</label>
-            <input type="text">
-          </div>
+    <div class="login-container">
+      <div class="form-item">
+        <div class="input">
+          <label for="">账号：</label>
+          <input type="text" />
+        </div>
+        <FormError :msg="'error1'" />
+      </div>
+
+      <div class="form-item">
+        <div class="input">
+          <label for="">密码：</label>
+          <input type="password" />
+        </div>
+        <FormError :msg="'error2'" />
+      </div>
+      <div class="form-item">
+        <div class="input">
+          <label></label><button>登陆</button>
         </div>
       </div>
+    </div>
   </Center>
 </template>
 
 <script>
 import Center from "@/components/Center";
+import FormError from "../components/FormError";
 
 export default {
   components: {
     Center,
-  }
-}
+    FormError,
+  },
+};
 </script>
 
-<style>
+<style scoped>
 .login-container {
   width: 400px;
 }
