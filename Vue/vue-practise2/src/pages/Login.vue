@@ -4,7 +4,11 @@
       <div class="form-item">
         <div class="input">
           <label for="">账号：</label>
-          <input type="text" v-model="userInfo.loginId" />
+          <input
+            type="text"
+            v-model="userInfo.loginId"
+            @input="validateId"
+          />
         </div>
         <FormError :msg="errorInfo.loginId" />
       </div>
@@ -12,12 +16,18 @@
       <div class="form-item">
         <div class="input">
           <label for="">密码：</label>
-          <input type="password" v-model="userInfo.loginPwd" />
+          <input
+            type="password"
+            v-model="userInfo.loginPwd"
+            @input="validatePwd"
+          />
         </div>
         <FormError :msg="errorInfo.loginPwd" />
       </div>
       <div class="form-item">
-        <div class="input"><label></label><button>登陆</button></div>
+        <div class="input">
+          <label></label><button>{{ loginStr }}</button>
+        </div>
       </div>
     </form>
   </Center>
@@ -48,6 +58,14 @@ export default {
 
   methods: {
     async handleSubmit() {
+      if (!this.validateId()) {
+        return;
+      }
+      
+      if (!this.validatePwd()) {
+        return;
+      }
+
       var success = await this.$store.dispatch(
         "loginUser/login",
         this.userInfo
@@ -57,7 +75,33 @@ export default {
         this.errorInfo.loginId = "账号/密码不正确";
       }
     },
+
+    validateEmpty(field, msg) {
+      if (this.userInfo[field] == "") {
+        this.errorInfo[field] = msg;
+        return false;
+      } else {
+        this.errorInfo[field] = "";
+
+        return true;
+      }
+    },
+
+    validateId() {
+      return this.validateEmpty('loginId', '账号不能为空');
+    },
+
+    validatePwd() {
+      return this.validateEmpty('loginPwd', '密码不能为空');
+    },
   },
+
+  computed: {
+    loginStr() {
+      return this.$store.state.loginUser.isLoading ? "isLoading..." : "登陆";
+    },
+  },
+
 };
 </script>
 
