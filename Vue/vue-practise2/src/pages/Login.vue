@@ -1,27 +1,25 @@
 <template>
   <Center>
-    <div class="login-container">
+    <form class="login-container" @submit.prevent="handleSubmit">
       <div class="form-item">
         <div class="input">
           <label for="">账号：</label>
-          <input type="text" />
+          <input type="text" v-model="userInfo.loginId" />
         </div>
-        <FormError :msg="'error1'" />
+        <FormError :msg="errorInfo.loginId" />
       </div>
 
       <div class="form-item">
         <div class="input">
           <label for="">密码：</label>
-          <input type="password" />
+          <input type="password" v-model="userInfo.loginPwd" />
         </div>
-        <FormError :msg="'error2'" />
+        <FormError :msg="errorInfo.loginPwd" />
       </div>
       <div class="form-item">
-        <div class="input">
-          <label></label><button>登陆</button>
-        </div>
+        <div class="input"><label></label><button>登陆</button></div>
       </div>
-    </div>
+    </form>
   </Center>
 </template>
 
@@ -30,9 +28,35 @@ import Center from "@/components/Center";
 import FormError from "../components/FormError";
 
 export default {
+  data() {
+    return {
+      userInfo: {
+        loginId: "",
+        loginPwd: "",
+      },
+      errorInfo: {
+        loginId: "",
+        loginPwd: "",
+      },
+    };
+  },
+
   components: {
     Center,
     FormError,
+  },
+
+  methods: {
+    async handleSubmit() {
+      var success = await this.$store.dispatch(
+        "loginUser/login",
+        this.userInfo
+      );
+
+      if (!success) {
+        this.errorInfo.loginId = "账号/密码不正确";
+      }
+    },
   },
 };
 </script>
