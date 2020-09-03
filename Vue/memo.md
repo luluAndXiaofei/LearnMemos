@@ -1133,4 +1133,9 @@ vue.config.js 是一个可选的配置文件，如果项目的 (和 package.json
 ```
 [具体配置](https://cli.vuejs.org/zh/config/#%E5%85%A8%E5%B1%80-cli-%E9%85%8D%E7%BD%AE)
 
-
+api的用户密码
+```js
+  //   loginId: "user2",
+  //   loginPwd: "1231231123",
+  //   nickname: "哈哈哈",
+```

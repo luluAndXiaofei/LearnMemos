@@ -4,11 +4,7 @@
       <div class="form-item">
         <div class="input">
           <label for="">账号：</label>
-          <input
-            type="text"
-            v-model="userInfo.loginId"
-            @input="validateId"
-          />
+          <input type="text" v-model="userInfo.loginId" @input="validateId" />
         </div>
         <FormError :msg="errorInfo.loginId" />
       </div>
@@ -61,7 +57,7 @@ export default {
       if (!this.validateId()) {
         return;
       }
-      
+
       if (!this.validatePwd()) {
         return;
       }
@@ -73,6 +69,8 @@ export default {
 
       if (!success) {
         this.errorInfo.loginId = "账号/密码不正确";
+      } else {
+        this.$router.push({ name: "home" });
       }
     },
 
@@ -88,11 +86,11 @@ export default {
     },
 
     validateId() {
-      return this.validateEmpty('loginId', '账号不能为空');
+      return this.validateEmpty("loginId", "账号不能为空");
     },
 
     validatePwd() {
-      return this.validateEmpty('loginPwd', '密码不能为空');
+      return this.validateEmpty("loginPwd", "密码不能为空");
     },
   },
 
@@ -101,7 +99,6 @@ export default {
       return this.$store.state.loginUser.isLoading ? "isLoading..." : "登陆";
     },
   },
-
 };
 </script>
 
