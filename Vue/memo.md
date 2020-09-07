@@ -1177,3 +1177,7 @@ v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做
 ```
 v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别。
 ```
+
+- axios
+axios.get()返回的是promise！
+[官方文档，非常易懂](http://www.axios-js.com/zh-cn/docs/)
