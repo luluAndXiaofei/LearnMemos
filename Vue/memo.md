@@ -1052,6 +1052,12 @@ computed: {
 ### `template`标签
 template在页面没有任何实际作用，不会显示什么东西。只会把多个元素组合在一起。
 
+```
+它是可以显示template标签中的内容，但是查看后台的dom结构不存在template标签。如果template标签不放在vue实例绑定的元素内部默认里面的内容不能显示在页面上，但是查看后台dom结构存在template标签。
+
+注意： vue实例绑定的元素内部的template标签不支持v-show指令，即v-show="false"对template标签来说不起作用。但是此时的template标签支持v-if、v-else-if、v-else、v-for这些指令。
+```
+
 ```html
 <template>
   <a href="">用户名</a>
@@ -1147,4 +1153,27 @@ vuex跟localStorage设计思想
 vuex他的数据是响应式的，而本地存储的数据不是响应式的
 
 eg:假如ab两个组件都在用本地存储，你改变了a组件里的数据，a页面数据虽然会同步到本地存储，但是由于数据不是响应式的，所以b页面的数据不会变，
+```
+mapstate展开的别名
+```js
+export default {
+  computed: {
+    ...mapState("channels", ["data", "isLoading"]),
+    ...mapState("loginUser", {
+      loginUser: "data",
+      isLogin: "isLoading",
+    }),
+  },
+};
+```
+
+```
+v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+```
+
+```
+v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别。
 ```

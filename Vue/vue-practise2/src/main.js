@@ -6,6 +6,7 @@ import router from "./routes/";
 import store from "./store";
 
 store.dispatch("channels/fetchData");
+store.dispatch("loginUser/whoami");
 
 new Vue({
   render: h => h(App),

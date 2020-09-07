@@ -31,9 +31,11 @@ export async function whoami() {
     return null;
   }
 
-  axios.get("/api/user/whoami", {
+  var result = await axios.get("/api/user/whoami", {
     headers: {
       authorization: `bearer ${token}`,
     },
   });
+
+  return result.data.data;
 }

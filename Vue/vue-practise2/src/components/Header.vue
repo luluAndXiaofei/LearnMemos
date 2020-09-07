@@ -10,14 +10,27 @@
         <ul class="nav">
           <li v-for="(item, i) in data.slice(0, 5)" :key="i">
             <router-link
-              :to="{ name: 'channel', params: { channelId: item.id }, query: { page: 1 }, }"
+              :to="{
+                name: 'channel',
+                params: { channelId: item.id },
+                query: { page: 1 },
+              }"
               >{{ item.name }}</router-link
             >
           </li>
         </ul>
         <div class="user">
-          <router-link :to="{ name: 'login' }">登陆</router-link>
-          <router-link :to="{ name: 'reg' }">注册</router-link>
+          <span v-if="isLogin">isLogin...</span>
+          <template v-else-if="loginUser">
+            <router-link :to="{ name: 'Personal' }">{{
+              loginUser.nickname
+            }}</router-link>
+            <a href="" @click.prevent="handleLogout">退出用户</a>
+          </template>
+          <template v-else>
+            <router-link :to="{ name: 'login' }">登陆</router-link>
+            <router-link :to="{ name: 'reg' }">注册</router-link>
+          </template>
         </div>
       </div>
     </div>
@@ -30,6 +43,17 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState("channels", ["data", "isLoading"]),
+    ...mapState("loginUser", {
+      loginUser: "data",
+      isLogin: "isLoading",
+    }),
+  },
+
+  methods: {
+    handleLogout() {
+      this.$store.dispatch("loginUser/logout");
+      this.$router.push({ name: "login" });
+    },
   },
 };
 </script>
