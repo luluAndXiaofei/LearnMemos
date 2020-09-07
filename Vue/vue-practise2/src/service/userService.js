@@ -39,3 +39,8 @@ export async function whoami() {
 
   return result.data.data;
 }
+
+export async function reg(userInfo) {
+  var res = await axios.post("/api/user/reg", userInfo);
+  return res.data;
+}

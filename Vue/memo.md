@@ -1141,9 +1141,9 @@ vue.config.js 是一个可选的配置文件，如果项目的 (和 package.json
 
 api的用户密码
 ```js
-  //   loginId: "user2",
-  //   loginPwd: "1231231123",
-  //   nickname: "哈哈哈",
+  //   loginId: "lulu2",
+  //   loginPwd: "123",
+  //   nickname: "lulu2",
 ```
 
 vuex跟localStorage设计思想
