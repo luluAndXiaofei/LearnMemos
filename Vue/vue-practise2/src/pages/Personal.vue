@@ -8,7 +8,9 @@
 import Center from "../components/Center";
 
 export default {
-
+  component: {
+    Center,
+  }
 }
 </script>
 

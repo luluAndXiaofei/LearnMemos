@@ -23,6 +23,27 @@ export default {
             name:"channel",
         },
         {
+            path:"/personal",
+            component: () => import("@/pages/Personal"),
+            name:"personal",
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path:"/auth",
+            component: () => import("@/pages/Auth"),
+            name:"auth",
+        },
+        {
+            path:"/protected",
+            component: () => import("@/pages/Protected"),
+            name:"protected",
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
             path:"*",
             component: () => import("@/pages/NotFound"),
             name: "notFound"

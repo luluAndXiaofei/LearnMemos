@@ -13,7 +13,7 @@ router.beforeEach(function(to, from, next) {
     } else if (store.state.loginUser.data) {
       next();
     } else {
-      next({ name: "Login" });
+      next({ name: "login" });
     }
   } else {
     next();

@@ -1181,3 +1181,54 @@ v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否�
 - axios
 axios.get()返回的是promise！
 [官方文档，非常易懂](http://www.axios-js.com/zh-cn/docs/)
+
+- 导航守卫
+```
+每个守卫方法接收三个参数：
+
+to: Route: 即将要进入的目标 路由对象
+
+from: Route: 当前导航正要离开的路由
+
+next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
+```
+
+- 路由元信息
+定义路由的时候可以配置 meta 字段
+[官方文档](https://router.vuejs.org/zh/guide/advanced/meta.html)
+
+
+- 定义路由元信息
+使用meta字段定义元信息
+```js
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/foo',
+      component: Foo,
+      children: [
+        {
+          path: 'bar',
+          component: Bar,
+          // a meta field
+          meta: { requiresAuth: true }
+        }
+      ]
+    }
+  ]
+})
+```
+
+- 获取路由元信息
+使用$routes.meta.xxx。如果是嵌套路由，使用$route.matched数组。
+
+- route对象取得路径参数，跟query参数
+1. 路径参数使用$route.params对象
+
+|模式	|匹配路径|	$route.params|
+|----|-------|---------------|
+|/user/:username|	/user/evan|	{ username: 'evan' }|
+|/user/:username/post/:post_id|	/user/evan/post/123|	{ username: 'evan', post_id: '123' }|
+
+2. query参数使用$routes.query对象
+比如/auth?returnurl=home可以通过$routes.query.returnurl获取

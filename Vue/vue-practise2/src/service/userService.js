@@ -24,7 +24,7 @@ export async function logout() {
 }
 
 export async function whoami() {
-  await delay(2000);
+  // await delay(2000);
   var token = localStorage.getItem("token");
 
   if (!token) {
