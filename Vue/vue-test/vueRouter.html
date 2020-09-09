@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vueRouter跟组件练习</title>
+  </head>
+  <body>
+    <style>
+      .tab {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <div id="app">
+      <Home></Home>
+      <router-link :to="{ name: 'phone' }">手机</router-link>
+      <router-link :to="{ name: 'game' }">游戏</router-link>
+      <div class="tab">
+        <router-view></router-view>
+      </div>
+    </div>
+
+    <script>
+      var Home = {
+        template: `<div>vueRouter跟组件练习</div>`,
+      };
+
+      var Phone = {
+        template: `<div>手机页面</div>`,
+      };
+
+      var Game = {
+        template: `<div>游戏页面</div>`,
+      };
+
+      var routes = [
+        { path: "/phone", name: "phone", component: Phone },
+        { path: "/game", name: "game", component: Game },
+      ];
+
+      var router = new VueRouter({
+        routes,
+      });
+
+      // 全局注册
+      // Vue.component("Home", Home);
+
+      var vm = new Vue({
+        router,
+        // 局部注册
+        components: {
+          Home: Home,
+        },
+      }).$mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>defineProperty</title>
+</head>
+<body>
+    <script>
+        function Saint() {
+        var skill;
+        Object.defineProperty(this, "name", {
+          configurable: true,
+          enumerable: true,
+          value: null,
+          writable: true,
+        });
+        Object.defineProperty(this, "skill", {
+          configurable: true,
+          enumerable: true,
+          get: function () {
+            console.log("get skill");
+            return skill;
+          },
+          set: function (_skill) {
+            console.log("set skill");
+            skill = _skill;
+          },
+        });
+      }
+
+      var silver = new Saint();
+      silver.name = "Orpheus";
+      console.log(silver);
+
+      var gold = new Saint();
+      gold.name = "Aioria";
+      gold.skill = "Lightning Bolt";
+      console.log(gold);
+    </script>
+</body>
+</html>

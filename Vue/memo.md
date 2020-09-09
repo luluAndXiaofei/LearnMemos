@@ -37,6 +37,13 @@
       - 对着html邮件，点击open with live server
 ---
 ## 第二节-vue核心概念
+### 模版字符串
+```js
+// 使用``来包裹字符串，内部可以换行。也可以使用${}占位符
+var name = "test";
+var str = `123${name}`;
+```
+
 ### Vue实例
   创建实例后，一些配置会提升到Vue实例中。
   - 提升实例的原因有二，一个是模版需要，一个是实现响应式（通过Object.defineProperty）。
@@ -112,6 +119,7 @@
    4. methods: 配置方法
    5. computed: 配置计算属性。
    > computed： 里面写方法，但当作属性用
+  
   - 计算属性跟方法的区别
   ```
     1. 计算属性使用时,是当成属性使用,而方法是调用的
@@ -178,10 +186,12 @@
 - 组件命名一般是大驼峰，一个组件实际上是个对象。
 ### 创建组件方法
 
-跟Vue的实例类似，但有以下不同
- 0. 只是普通的对象，并不是Vue对象
+组件跟Vue的根实例类似，但有以下不同
+
+ 1. ~~只是普通的对象，并不是Vue对象~~
+ 1. 组件是可复用的 Vue 实例，且带有一个名字。他们接收与new Vue相同的选项
  1. 无el, 但有类似的template,所以模版必须配置在template中
- 2. data必须是一个[**函数**]，该函数必须返回对象，并把该对象作为数据。因为复用数据时可以相对独立，互不影响。
+ 1. data必须是一个[**函数**]，该函数必须返回对象，并把该对象作为数据。因为复用数据时函数内部的变量可以相对独立，互不影响。
 
 组件的例子
 ```js
@@ -206,24 +216,37 @@ var comp = {
 }
 ```
 
-### 组件导入方法
-1. 组件本身导出
- ```js
- export default {
-    // data() {
-    //     return {
-    //         name: "张三",
-    //         age: 18,
-    //     };
-    // },
-    props: ["name", "age"],
-    template,
-}
+### 组件的创建
+1. 使用vue-cli时（局部注册）
+ ```html
+    <template>
+      <div>
+          component1
+      </div>
+    </template>
+
+    <script>
+    export default {
+
+    }
+    </script>
+
+    <style>
+
+    </style>
  ```
 
-2. 使用组件处导入
+2. 全局注册时
  ```js
- import UserInfo from "./components/UserInfo.js";
+  // 定义一个名为 button-counter 的新组件
+  Vue.component('button-counter', {
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  })
  ```
 
 ### 组件注册方法
@@ -235,6 +258,7 @@ var comp = {
    ```
 2. 局部注册：
    ```js
+   import UserInfo from "./components/UserInfo";
    new Vue() {
      components: {
        UserInfo: UserInfo
@@ -242,10 +266,18 @@ var comp = {
    }
    ```
 ### 应用组件
-把组件当成元素去使用即可。
+把组件当成自定义元素去使用即可。并且组件可以复用
+
+```html
+<div id="components-demo">
+  <button-counter></button-counter>
+  <button-counter></button-counter>
+  <button-counter></button-counter>
+</div>
+```
 
 ### 向组件传递数据
-1. props里面添加属性
+1. Prop 是你可以在组件上注册的一些自定义 attribute。当一个值传递给一个 prop attribute 的时候，它就变成了那个组件实例的一个 property。
 2. 使用属性。同样是把组件当成元素, 给元素的属性赋值就会赋值给props
 
 
@@ -605,7 +637,7 @@ methods: {
 ## 第九节-开发加载组件
 
 ### 插槽
-模版中的某个位置，不知道内容。此时可以使用<slot></slot>进行占位。
+模版中的某个位置，不知道内容。此时可以使用<slot></slot>进行占位。其实作用就是提供大部分时候的默认值。
 
 ```html
 <template>
