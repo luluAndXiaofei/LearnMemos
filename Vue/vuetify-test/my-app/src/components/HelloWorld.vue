@@ -38,25 +38,38 @@
     <v-app>
       <v-navigation-drawer v-model="drawer" app>
         <v-list dense nav>
-          <v-list-item-group color="primary">
-            <v-list-item
-              v-for="item in items"
-              :key="item.title"
-              link
-              @click="handleClick(item)"
-            >
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
-
+          <v-list-group
+            v-for="item in items"
+            :key="item.title"
+            v-model="item.active"
+            :prepend-icon="item.icon"
+            no-action
+          >
+            <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title>{{ item.title }} </v-list-item-title>
-                <v-list-item-subtitle>{{
-                  item.secondaryText
-                }}</v-list-item-subtitle>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item-content>
+            </template>
+
+            <v-list-item-group v-if="item.items.length != 0">
+              <v-list-item
+                v-for="subItem in item.items"
+                :key="subItem.title"
+                @click.stop=""
+              >
+                <v-list-item-icon></v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="subItem.title"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+
+            <v-list-item v-else>
+              <v-list-item-title>
+                nothing
+              </v-list-item-title>
             </v-list-item>
-          </v-list-item-group>
+          </v-list-group>
         </v-list>
       </v-navigation-drawer>
     </v-app>
@@ -73,28 +86,74 @@ export default {
           title: "Vuetify",
           icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "Vue的ui库-Vuetify的介绍",
+          active: true,
+          items: [
+            {
+              title: "日志1",
+            },
+            {
+              title: "日志2",
+            },
+          ],
         },
         {
           title: "Vue",
           icon: "mdi-checkbox-multiple-blank-circle",
           secondaryText: "前端框架Vue",
+          active: false,
+          items: [
+            {
+              title: "日志1",
+            },
+            {
+              title: "日志2",
+            },
+          ],
         },
         {
           title: "Python",
           icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "Python日志",
+          items: [
+            {
+              title: "日志1",
+            },
+            {
+              title: "日志2",
+            },
+          ],
         },
         {
           title: "Java",
           icon: "mdi-checkbox-multiple-blank-circle",
           secondaryText: "Java日志",
+          items: [
+            {
+              title: "日志1",
+            },
+            {
+              title: "日志2",
+            },
+          ],
         },
         {
           title: "JavaScript",
           icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "JavaScript日志",
+          items: [
+            {
+              title: "日志1",
+            },
+            {
+              title: "日志2",
+            },
+          ],
         },
-        { title: "PostgreSQL", icon: "mdi-checkbox-multiple-blank-circle" },
+        {
+          title: "PostgreSQL",
+          icon: "mdi-checkbox-multiple-blank-circle",
+          items: [],
+        },
       ],
       right: null,
       drawer: null,
