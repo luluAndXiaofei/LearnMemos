@@ -1264,3 +1264,20 @@ const router = new VueRouter({
 
 2. query参数使用$routes.query对象
 比如/auth?returnurl=home可以通过$routes.query.returnurl获取
+
+
+# 关于vue的其他笔记
+- 修改npm run serve的启动IP地址与端口号，就修改vue.config.js中的`host`跟`port`。如果没有就自己添加属性。
+```js
+  devServer: {
+    host: "127.0.0.1",
+    port: 4000,
+    proxy: {
+      '^/km4d': {
+        target: 'http://localhost',
+        ws: true,
+        changeOrigin: true
+      }
+    }
+  }
+```
