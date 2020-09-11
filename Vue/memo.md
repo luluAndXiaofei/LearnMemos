@@ -654,16 +654,83 @@ methods: {
  <Center>123</Center>
 ```
 
-### 插槽默认值
-插槽可以有默认值，当设置值时不显示默认值，反之显示默认值
+### 插槽内容
+插槽就是定义组件时，留出一段空余位置，由使用该组件的父组件填充。插槽可以有默认值，当父组件设置值时`<slot></solt>`部分被替换，反之显示默认值。插槽内可以包含任何模板代码，包括 HTML。
 
 ```html
-<template>
-  <div class="center">
-      <slot>默认值</slot>
-  </div>
-</template>
+<!-- TestSlot.vue -->
+<div class="center">
+    <slot>默认值</slot>
+</div>
 ```
+
+```html
+<!-- 显示“默认值” -->
+<div>
+  <TestSlot>
+  </TestSlot>
+</div>
+
+<!-- 显示“123” -->
+<div>
+  <TestSlot>
+    123
+  </TestSlot>
+</div>
+```
+
+### 具名插槽
+插槽定义的是出口，有时候我们要多个出口。比如下面的例子，header是一个出口，main跟footer也是一个出口。
+```html
+<!-- base-layout.vue -->
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+```
+使用具名插槽时，可以通过`template v-slot:插槽名`来指定出口渲染。冒号是指令的参数。
+```html
+<base-layout>
+  <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <template v-slot:default>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </template>
+
+  <template v-slot:footer>
+    <p>Here's some contact info</p>
+  </template>
+</base-layout>
+```
+
+### 作用域插槽
+想让父组件使用子组件的内容，可以使用`slot`的`v-bind`指令，绑定想要暴露的数据。这里是user。
+```html
+<span>
+  <slot v-bind:user="user">
+    {{ user.lastName }}
+  </slot>
+</span>
+```
+绑定在 <slot> 元素上的 attribute 被称为插槽 prop。现在在父级作用域中，我们可以使用带值的 v-slot 来定义我们提供的插槽 prop 的名字：
+```html
+<current-user>
+  <template v-slot:default="slotProps">
+    {{ slotProps.user.firstName }}
+  </template>
+</current-user>
+```
+
 
 ---
 ## 第十节-完成首页
