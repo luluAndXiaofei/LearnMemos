@@ -65,12 +65,16 @@ new Vue({
 - `right`属性，如果不指定，则默认在左边。
 - `v-list`列表通常与导航栏配合使用。
 
-### 列表`-vlist`
-- `v-list-item`是列表项。
+### 列表`v-list`
+使用`v-list`可以轻松的生成列表。可以
+- `v-list-item`是列表项。有各种属性
 - `v-list-item-group`可以把列表项变成组，实现选中状态的UI
 - `v-list-item-icon`表示列表项的图标。
 - `v-list-item-content`是列表的内容，内容又分为1行，2行，3行。1行指定`v-list-item-title`,2行指定`v-list-item-subtitle`,3行指定``
 
+### 可展开列表`v-list-group`
+使用`v-list-group`可以在列表中生成展开列表。每个展开列表都是`v-list`的列表项。每个展开列表内有一个`v-list-item-title`跟复数个`v-list-item`。
+- `v-list-item-title`需要被`<template v-slot:activator>`包裹。`activator`是`v-list-group`的具名插槽，指定后的title点击就可以展开子列表。
 
 ## 图标
 使用这里的`https://materialdesignicons.com/cdn/2.0.46/`

@@ -37,7 +37,8 @@
 
     <v-app>
       <v-navigation-drawer v-model="drawer" app>
-        <v-list dense nav>
+        <!-- 指定expand则手动关闭子项 -->
+        <v-list dense nav expand>
           <v-list-group
             v-for="item in items"
             :key="item.title"
@@ -46,23 +47,22 @@
             no-action
           >
             <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
+              <!-- activator具名插槽 触发点击事件可以展开子项 -->
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </template>
 
-            <v-list-item-group v-if="item.items.length != 0">
+            <template v-if="item.items.length != 0">
               <v-list-item
                 v-for="subItem in item.items"
                 :key="subItem.title"
-                @click.stop=""
+                @click.stop="handleListItemClick(subItem)"
+                :input-value="subItem.active"
               >
-                <v-list-item-icon></v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title v-text="subItem.title"></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </v-list-item-group>
+            </template>
 
             <v-list-item v-else>
               <v-list-item-title>
@@ -86,13 +86,15 @@ export default {
           title: "Vuetify",
           icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "Vue的ui库-Vuetify的介绍",
-          active: true,
+          active: false,
           items: [
             {
               title: "日志1",
+              active: false,
             },
             {
               title: "日志2",
+              active: false,
             },
           ],
         },
@@ -104,9 +106,11 @@ export default {
           items: [
             {
               title: "日志1",
+              active: false,
             },
             {
               title: "日志2",
+              active: false,
             },
           ],
         },
@@ -117,9 +121,11 @@ export default {
           items: [
             {
               title: "日志1",
+              active: false,
             },
             {
               title: "日志2",
+              active: false,
             },
           ],
         },
@@ -130,9 +136,11 @@ export default {
           items: [
             {
               title: "日志1",
+              active: false,
             },
             {
               title: "日志2",
+              active: false,
             },
           ],
         },
@@ -143,9 +151,11 @@ export default {
           items: [
             {
               title: "日志1",
+              active: false,
             },
             {
               title: "日志2",
+              active: false,
             },
           ],
         },
@@ -161,8 +171,16 @@ export default {
   },
 
   methods: {
-    handleClick(item) {
-      console.log(item.title);
+    handleListItemClick(item) {
+      this.clearItemActive();
+      item.active = true;
+    },
+
+    clearItemActive() {
+      // 清除所有列表子项的选中状态
+      this.items.map((item) =>
+        item.items.map((subItem) => (subItem.active = false))
+      );
     },
   },
 };
