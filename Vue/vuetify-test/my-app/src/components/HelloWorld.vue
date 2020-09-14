@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app>
-      <v-app-bar app color="blue darken-3" dark dense>
+      <v-app-bar app color="blue darken-3" dark scroll-target="#scroll1" dense>
         <!-- 默认图标 -->
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <!-- 自定义图标 -->
@@ -33,6 +33,50 @@
           </v-list>
         </v-menu>
       </v-app-bar>
+
+      <v-sheet id="scroll1" class="overflow-y-auto" elevation="3">
+        <v-container>
+          <div style="position:relative;z-index:0">
+            <mavon-editor
+              min-height="1000px"
+              v-model="text"
+              :subfield="false"
+              :boxShadow="false"
+              defaultOpen="preview"
+              :toolbarsFlag="false"
+            />
+          </div>
+
+          <v-card class="ma-8" tile>
+            <v-list
+              :disabled="disabled"
+              :dense="dense"
+              :two-line="twoLine"
+              :three-line="threeLine"
+              :shaped="shaped"
+              :flat="flat"
+              :subheader="subheader"
+              :sub-group="subGroup"
+              :nav="nav"
+              :avatar="avatar"
+              :rounded="rounded"
+            >
+              <v-subheader>其他文章</v-subheader>
+              <v-list-item @click="1">
+                <v-list-item-content>
+                  <v-list-title>123</v-list-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item @click="1">
+                <v-list-item-content>
+                  <v-list-title>123</v-list-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-container>
+      </v-sheet>
     </v-app>
 
     <v-app>
@@ -167,6 +211,12 @@ export default {
       ],
       right: null,
       drawer: null,
+      text: `# Vuetify入门教程
+## Vuetify是什么
+Vuetify是基于Vue.js的UI组件库。 是遵循谷歌倡导的[Material Design specification](https://material.io/design)，高质量组件。说白了，Vuetify提供了现成的各种组件，即使没有设计方面的知识，也可以非常简单的(通过复制粘贴)来实现炫酷的UI。[官网](https://vuetifyjs.com/zh-Hans/getting-started/quick-start/)提供了非常详细的说明。
+
+## 使用Vuetify创建第一个项目
+前提:本地安装好vue-cli环境。`,
     };
   },
 
