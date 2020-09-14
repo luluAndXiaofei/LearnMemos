@@ -34,52 +34,6 @@
         </v-menu>
       </v-app-bar>
 
-      <v-sheet id="scroll1" class="overflow-y-auto" elevation="3">
-        <v-container>
-          <div style="position:relative;z-index:0">
-            <mavon-editor
-              min-height="1000px"
-              v-model="text"
-              :subfield="false"
-              :boxShadow="false"
-              defaultOpen="preview"
-              :toolbarsFlag="false"
-            />
-          </div>
-
-          <v-card class="ma-8" tile>
-            <v-list
-              :disabled="disabled"
-              :dense="dense"
-              :two-line="twoLine"
-              :three-line="threeLine"
-              :shaped="shaped"
-              :flat="flat"
-              :subheader="subheader"
-              :sub-group="subGroup"
-              :nav="nav"
-              :avatar="avatar"
-              :rounded="rounded"
-            >
-              <v-subheader>其他文章</v-subheader>
-              <v-list-item @click="1">
-                <v-list-item-content>
-                  <v-list-title>123</v-list-title>
-                </v-list-item-content>
-              </v-list-item>
-
-              <v-list-item @click="1">
-                <v-list-item-content>
-                  <v-list-title>123</v-list-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-card>
-        </v-container>
-      </v-sheet>
-    </v-app>
-
-    <v-app>
       <v-navigation-drawer v-model="drawer" app>
         <!-- 指定expand则手动关闭子项 -->
         <v-list dense nav expand>
@@ -116,6 +70,58 @@
           </v-list-group>
         </v-list>
       </v-navigation-drawer>
+
+      <v-main>
+        <!-- <v-sheet id="scroll1" class="overflow-y-auto" elevation="3"> -->
+        <v-container>
+          <!-- <div style="position:relative;z-index:0">
+            <mavon-editor
+              min-height="1000px"
+              v-model="text"
+              :subfield="false"
+              :boxShadow="false"
+              defaultOpen="preview"
+              :toolbarsFlag="false"
+            />
+          </div> -->
+
+          <v-card class="mt-8" tile>
+            <v-list
+              :disabled="disabled"
+              :dense="dense"
+              :two-line="twoLine"
+              :three-line="threeLine"
+              :shaped="shaped"
+              :flat="flat"
+              :subheader="subheader"
+              :sub-group="subGroup"
+              :nav="nav"
+              :avatar="avatar"
+              :rounded="rounded"
+            >
+              <v-subheader>其他文章</v-subheader>
+              <v-list-item @click="1">
+                <v-list-item-content>
+                  <v-list-title>文章1</v-list-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item @click="1">
+                <v-list-item-content>
+                  <v-list-title>文章2</v-list-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item @click="1">
+                <v-list-item-content>
+                  <v-list-title>文章3</v-list-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-container>
+        <!-- </v-sheet> -->
+      </v-main>
     </v-app>
   </div>
 </template>
