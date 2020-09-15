@@ -127,7 +127,8 @@ new Vue({
 <mavon-editor v-model="value"/>
 ```
 
-### 
+### v-main,v-container编写内容区
+分别使用div跟v-card来配置主文章，其他文章。
 
 
 
