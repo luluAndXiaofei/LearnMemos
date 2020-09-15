@@ -84,7 +84,7 @@
             />
           </div>
 
-          <v-card class="mt-8" tile>
+          <v-card class="mt-8">
             <v-list
               :disabled="disabled"
               :dense="dense"

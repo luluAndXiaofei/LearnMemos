@@ -73,26 +73,31 @@ blue darken-3
 ### 导航栏`v-navigation-drawer`
 - `v-navigation-drawer`必须被`v-app`包裹。否则很多属性不生效。
 - `app`属性指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。
-- `v-model`设置为true时显示导航栏，false不显示
+- `v-model`设置为true时显示导航栏，false不显示。
 - `right`属性，如果不指定，则默认在左边。
 - `v-list`列表通常与导航栏配合使用。
 
 ### 列表`v-list`
 使用`v-list`可以轻松的生成列表。可以
-- `v-list-item`是列表项。有各种属性
+- `v-list-item`是列表项。有各种属性。
 - `v-list-item-group`可以把列表项变成组，实现选中状态的UI
 - `v-list-item-icon`表示列表项的图标。
 - `v-list-item-content`是列表的内容，内容又分为1行，2行，3行。1行指定`v-list-item-title`,2行指定`v-list-item-subtitle`,3行指定``
 
 ### 可展开列表`v-list-group`
-使用`v-list-group`可以在列表中生成展开列表。每个展开列表都是`v-list`的列表项。每个展开列表内有一个`v-list-item-title`跟复数个`v-list-item`。
+- 使用`v-list-group`可以在列表中生成展开列表。
+- value属性（或者v-model指令）控制展开列表的打开或关闭。
+- 每个展开列表都是`v-list`的列表项。每个展开列表内有一个`v-list-item-title`跟复数个`v-list-item`。
 - `v-list-item-title`需要被`<template v-slot:activator>`包裹。`activator`是`v-list-group`的具名插槽，指定后的title点击就可以展开子列表。
 
+
+### 每个`v-list-group`选中高亮问题
+由于各个group的展开项是互相分离的，一个选中其他解除高亮需要程序自己控制。也就是控制`v-list-item`的`input-value`属性控制是否选中。
 
 ## 让我们开始编辑内容区
 
 ### 首先导入一个markdown插件
-我们想在内容区显示一个markdown的文章。已经有一个优秀的markdown插件[mavonEditor](https://github.com/hinesboy/mavonEditor)
+我们想在内容区显示一个markdown的文章。已经有一个优秀的markdown插件[mavonEditor](https://github.com/hinesboy/mavonEditor)。我们可以使用div标签插入，但是问题是层级需要调整z-index。
 
 #### Install mavon-editor (安装)
 ```shell
