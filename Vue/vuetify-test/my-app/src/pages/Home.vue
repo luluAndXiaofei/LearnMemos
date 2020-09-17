@@ -62,10 +62,10 @@
         <!-- 指定expand则手动关闭子项 -->
         <v-list dense nav expand>
           <v-list-group
-            v-for="item in items"
+            v-for="(item, i) in items"
             :key="item.title"
             v-model="item.active"
-            :prepend-icon="item.icon"
+            :prepend-icon="icon(i)"
             no-action
           >
             <template v-slot:activator>
@@ -109,10 +109,16 @@ export default {
   data() {
     return {
       search: true,
-      items: [
+      items: [],
+      right: null,
+      drawer: null,
+    };
+  },
+
+  created() {
+    this.items = [
         {
           title: "Vuetify",
-          icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "Vue的ui库-Vuetify的介绍",
           active: false,
           items: [
@@ -128,7 +134,6 @@ export default {
         },
         {
           title: "Vue",
-          icon: "mdi-checkbox-multiple-blank-circle",
           secondaryText: "前端框架Vue",
           active: false,
           items: [
@@ -144,7 +149,6 @@ export default {
         },
         {
           title: "Python",
-          icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "Python日志",
           items: [
             {
@@ -159,7 +163,6 @@ export default {
         },
         {
           title: "Java",
-          icon: "mdi-checkbox-multiple-blank-circle",
           secondaryText: "Java日志",
           items: [
             {
@@ -174,7 +177,6 @@ export default {
         },
         {
           title: "JavaScript",
-          icon: "mdi-checkbox-multiple-blank-circle-outline",
           secondaryText: "JavaScript日志",
           items: [
             {
@@ -189,13 +191,9 @@ export default {
         },
         {
           title: "PostgreSQL",
-          icon: "mdi-checkbox-multiple-blank-circle",
           items: [],
         },
-      ],
-      right: null,
-      drawer: null,
-    };
+      ];
   },
 
   methods: {
@@ -211,6 +209,11 @@ export default {
       );
     },
 
+    icon(index) {
+      return index % 2 == 0
+        ? "mdi-checkbox-multiple-blank-circle-outline"
+        : "mdi-checkbox-multiple-blank-circle";
+    },
   },
 };
 </script>

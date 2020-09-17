@@ -136,6 +136,24 @@ new Vue({
 分别使用div跟v-card来配置主文章，其他文章。
 
 
+## 使用`v-tooltip`
+`v-tooltip`是鼠标悬停时提示的组件。它提供了插槽可以提供给其他组件，例如一个button。
+```html
+<v-tooltip color="cyan darken-1" bottom>
+  <template v-slot:activator="{ attrs, on }">
+    <router-link :to="{ name: 'main' }">
+      <v-btn icon v-bind="attrs" v-on="on" class="mr-1">
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+    </router-link>
+  </template>
+  <span>写日志</span>
+</v-tooltip>
+```
+
+## 使用`v-text-field`
+`v-text-field`用于一行文本的输入。所以可以用来当作输入栏。比如用户名，密码，搜索栏等等。
+
 
 ## 图标
 使用这里的`https://materialdesignicons.com/cdn/2.0.46/`
