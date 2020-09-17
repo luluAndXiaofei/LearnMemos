@@ -19,7 +19,7 @@
               </v-btn>
             </router-link>
           </template>
-          <span>写日志</span>
+          <span>回首页</span>
         </v-tooltip>
 
         <v-tooltip color="cyan darken-1" bottom>
