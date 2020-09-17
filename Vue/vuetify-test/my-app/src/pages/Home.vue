@@ -3,7 +3,7 @@
     <v-app>
       <v-app-bar app color="blue darken-3" dark dense>
         <!-- 默认图标 -->
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <!-- 自定义图标 -->
         <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"><v-icon>mdi-dots-vertical</v-icon></v-app-bar-nav-icon> -->
 
@@ -11,13 +11,37 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
+        <v-tooltip color="cyan darken-1" bottom>
+          <template v-slot:activator="{ attrs, on }">
+            <router-link :to="{ name: 'main' }">
+              <v-btn icon v-bind="attrs" v-on="on" class="mr-1">
+                <v-icon>mdi-home</v-icon>
+              </v-btn>
+            </router-link>
+          </template>
+          <span>写日志</span>
+        </v-tooltip>
 
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+        <v-tooltip color="cyan darken-1" bottom>
+          <template v-slot:activator="{ attrs, on }">
+            <router-link :to="{ name: 'newBlog' }">
+              <v-btn icon v-bind="attrs" v-on="on" class="mr-1">
+                <v-icon>mdi-pen</v-icon>
+              </v-btn>
+            </router-link>
+          </template>
+          <span>写日志</span>
+        </v-tooltip>
+
+        <v-text-field
+          flat
+          dense
+          solo-inverted
+          hide-details
+          prepend-inner-icon="mdi-magnify"
+          label="搜索我的日志"
+          style="max-width: 200px;"
+        ></v-text-field>
 
         <v-menu left bottom>
           <template v-slot:activator="{ on, attrs }">
@@ -84,6 +108,7 @@
 export default {
   data() {
     return {
+      search: true,
       items: [
         {
           title: "Vuetify",
@@ -185,6 +210,7 @@ export default {
         item.items.map((subItem) => (subItem.active = false))
       );
     },
+
   },
 };
 </script>

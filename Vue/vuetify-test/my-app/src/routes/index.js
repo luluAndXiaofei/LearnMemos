@@ -1,15 +1,24 @@
 import VueRouter from "vue-router";
-import Home from "../pages/Home";
-import Blog from "../components/Blog";
+import Main from "../pages/Main";
+import Blog from "../pages/Blog";
+import NewBlog from "../pages/NewBlog";
+
 
 var routes = [
     {
-        path: "/home",
-        component: Home,
+        path: "/",
+        name: "main",
+        component: Main,
     },
     {
         path: "/blog/:blogId",
+        name: "blog",
         component: Blog,
+    },
+    {
+        path: "/newblog/",
+        name: "newBlog",
+        component: NewBlog,
     },
 ]
 
