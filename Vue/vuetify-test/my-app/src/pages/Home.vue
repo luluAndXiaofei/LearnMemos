@@ -11,9 +11,15 @@
 
         <v-spacer></v-spacer>
 
-        <Tooltip link="main" icon="mdi-home" text="回首页"/>
-        <Tooltip link="newBlog" icon="mdi-pen" text="写日志"/>
-        <Tooltip icon="mdi-telegram" text="发布"/>
+        <Tooltip link="main" icon="mdi-home" text="回首页" />
+        <Tooltip v-if="newBlog" link="newBlog" icon="mdi-pen" text="写日志" />
+        <Tooltip
+          v-if="!newBlog"
+          icon="mdi-telegram"
+          text="发布"
+          @onClick="handlePublish"
+          :loading="loading"
+        />
 
         <v-text-field
           flat
@@ -33,8 +39,12 @@
           </template>
 
           <v-list>
-            <v-list-item v-for="option in options" :key="option" @click="() => {}">
-              <v-list-item-title>{{option}}</v-list-item-title>
+            <v-list-item
+              v-for="option in options"
+              :key="option"
+              @click="() => {}"
+            >
+              <v-list-item-title>{{ option }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -78,7 +88,7 @@
       </v-navigation-drawer>
 
       <v-main>
-        <v-container >
+        <v-container>
           <router-view />
         </v-container>
       </v-main>
@@ -100,89 +110,91 @@ export default {
       items: [],
       right: null,
       drawer: null,
-      options:["设置", "关于", "退出登陆"],
+      options: ["设置", "关于", "退出登陆"],
+      newBlog: true,
+      loading: false,
     };
   },
 
   created() {
     this.items = [
-        {
-          title: "Vuetify",
-          secondaryText: "Vue的ui库-Vuetify的介绍",
-          active: false,
-          items: [
-            {
-              title: "日志1",
-              active: false,
-            },
-            {
-              title: "日志2",
-              active: false,
-            },
-          ],
-        },
-        {
-          title: "Vue",
-          secondaryText: "前端框架Vue",
-          active: false,
-          items: [
-            {
-              title: "日志1",
-              active: false,
-            },
-            {
-              title: "日志2",
-              active: false,
-            },
-          ],
-        },
-        {
-          title: "Python",
-          secondaryText: "Python日志",
-          items: [
-            {
-              title: "日志1",
-              active: false,
-            },
-            {
-              title: "日志2",
-              active: false,
-            },
-          ],
-        },
-        {
-          title: "Java",
-          secondaryText: "Java日志",
-          items: [
-            {
-              title: "日志1",
-              active: false,
-            },
-            {
-              title: "日志2",
-              active: false,
-            },
-          ],
-        },
-        {
-          title: "JavaScript",
-          secondaryText: "JavaScript日志",
-          items: [
-            {
-              title: "日志1",
-              active: false,
-            },
-            {
-              title: "日志2",
-              active: false,
-            },
-          ],
-        },
-        {
-          title: "PostgreSQL",
-          items: [],
-        },
-      ];
+      {
+        title: "Vuetify",
+        secondaryText: "Vue的ui库-Vuetify的介绍",
+        active: false,
+        items: [
+          {
+            title: "日志1",
+            active: false,
+          },
+          {
+            title: "日志2",
+            active: false,
+          },
+        ],
+      },
+      {
+        title: "Vue",
+        secondaryText: "前端框架Vue",
+        active: false,
+        items: [
+          {
+            title: "日志1",
+            active: false,
+          },
+          {
+            title: "日志2",
+            active: false,
+          },
+        ],
+      },
+      {
+        title: "Python",
+        secondaryText: "Python日志",
+        items: [
+          {
+            title: "日志1",
+            active: false,
+          },
+          {
+            title: "日志2",
+            active: false,
+          },
+        ],
+      },
+      {
+        title: "Java",
+        secondaryText: "Java日志",
+        items: [
+          {
+            title: "日志1",
+            active: false,
+          },
+          {
+            title: "日志2",
+            active: false,
+          },
+        ],
+      },
+      {
+        title: "JavaScript",
+        secondaryText: "JavaScript日志",
+        items: [
+          {
+            title: "日志1",
+            active: false,
+          },
+          {
+            title: "日志2",
+            active: false,
+          },
+        ],
+      },
+      {
+        title: "PostgreSQL",
+        items: [],
+      },
+    ];
   },
 
   methods: {
@@ -203,6 +215,26 @@ export default {
         ? "mdi-checkbox-multiple-blank-circle-outline"
         : "mdi-checkbox-multiple-blank-circle";
     },
+
+    handlePublish() {
+      this.loading = true;
+      setTimeout(() => {
+        console.log("发表日志");
+        this.loading = false;
+        this.$router.push({ name: "complete" });
+      }, 2000);
+    },
+  },
+
+  updated() {
+    this.newBlog = this.$route.name != "newBlog";
   },
 };
 </script>
+
+<style scoped>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+</style>

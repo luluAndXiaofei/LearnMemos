@@ -2,7 +2,15 @@
   <v-tooltip color="cyan darken-1" bottom>
     <template v-slot:activator="{ attrs, on }">
       <router-link :to="to">
-        <v-btn icon v-bind="attrs" v-on="on" class="mr-1">
+        <v-btn
+          icon
+          v-bind="attrs"
+          v-on="on"
+          class="mr-1"
+          :loading="loading"
+          :disabled="loading"
+          @click="handleClick"
+        >
           <v-icon>{{ icon }}</v-icon>
         </v-btn>
       </router-link>
@@ -27,6 +35,10 @@ export default {
       default: "",
       type: String,
     },
+    loading: {
+      default: false,
+      type: Boolean,
+    },
   },
 
   computed: {
@@ -34,7 +46,14 @@ export default {
       return { name: this.link };
     },
   },
+
+  methods: {
+    handleClick() {
+      this.$emit("onClick");
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+</style>

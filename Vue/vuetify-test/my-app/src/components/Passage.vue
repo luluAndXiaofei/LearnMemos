@@ -45,7 +45,7 @@
 export default {
   methods: {
     clickLabel(label) {
-      alert(label);
+      this.$emit("clickLabel", label)
     },
   },
   props: {
@@ -66,7 +66,7 @@ export default {
       type: Number,
     },
     labels: {
-      default: () => ["java", "python", "vue"],
+      default: () => [],
       type: Array,
     },
   },

@@ -31,7 +31,7 @@ export default {
   methods: {
     async handleSave(savedText) {
       this.loading = true;
-      console.log(savedText);
+      console.log("保存中:" + savedText);
       await this.delay(2000);
       this.loading = false;
     },

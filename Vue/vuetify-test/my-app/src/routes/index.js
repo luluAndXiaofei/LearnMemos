@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 import Main from "../pages/Main";
 import Blog from "../pages/Blog";
 import NewBlog from "../pages/NewBlog";
+import Complete from "../pages/Complete";
 
 
 var routes = [
@@ -19,6 +20,11 @@ var routes = [
         path: "/newblog/",
         name: "newBlog",
         component: NewBlog,
+    },
+    {
+        path: "/complete/",
+        name: "complete",
+        component: Complete,
     },
 ]
 
