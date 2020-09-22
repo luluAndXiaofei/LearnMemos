@@ -6,7 +6,7 @@ import NewBlog from "../pages/NewBlog";
 
 var routes = [
     {
-        path: "/",
+        path: "/main",
         name: "main",
         component: Main,
     },

@@ -12,7 +12,7 @@
         @click:close="chip1 = false"
         small
       >
-        Success
+        Java
       </v-chip>
     </div>
 

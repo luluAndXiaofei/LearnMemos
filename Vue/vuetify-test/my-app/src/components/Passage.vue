@@ -1,7 +1,9 @@
 <template>
   <v-card class="mb-4">
     <v-card-title>
-      <router-link :to="{ name: 'blog' }" class="link">{{ title }}</router-link>
+      <router-link :to="{ name: 'blog', params: { blogId: 1 } }" class="link">{{
+        title
+      }}</router-link>
     </v-card-title>
 
     <v-card-subtitle>
