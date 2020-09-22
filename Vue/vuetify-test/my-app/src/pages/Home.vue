@@ -11,27 +11,9 @@
 
         <v-spacer></v-spacer>
 
-        <v-tooltip color="cyan darken-1" bottom>
-          <template v-slot:activator="{ attrs, on }">
-            <router-link :to="{ name: 'main' }">
-              <v-btn icon v-bind="attrs" v-on="on" class="mr-1">
-                <v-icon>mdi-home</v-icon>
-              </v-btn>
-            </router-link>
-          </template>
-          <span>回首页</span>
-        </v-tooltip>
-
-        <v-tooltip color="cyan darken-1" bottom>
-          <template v-slot:activator="{ attrs, on }">
-            <router-link :to="{ name: 'newBlog' }">
-              <v-btn icon v-bind="attrs" v-on="on" class="mr-1">
-                <v-icon>mdi-pen</v-icon>
-              </v-btn>
-            </router-link>
-          </template>
-          <span>写日志</span>
-        </v-tooltip>
+        <Tooltip link="main" icon="mdi-home" text="回首页"/>
+        <Tooltip link="newBlog" icon="mdi-pen" text="写日志"/>
+        <Tooltip icon="mdi-telegram" text="发布"/>
 
         <v-text-field
           flat
@@ -96,7 +78,7 @@
       </v-navigation-drawer>
 
       <v-main>
-        <v-container>
+        <v-container >
           <router-view />
         </v-container>
       </v-main>
@@ -105,7 +87,13 @@
 </template>
 
 <script>
+import Tooltip from "../components/Tooltip";
+
 export default {
+  components: {
+    Tooltip,
+  },
+
   data() {
     return {
       search: true,

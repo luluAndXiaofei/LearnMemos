@@ -154,6 +154,33 @@ new Vue({
 ## 使用`v-text-field`
 `v-text-field`用于一行文本的输入。所以可以用来当作输入栏。比如用户名，密码，搜索栏等等。
 
+## 关于文字
+### 文字大小
+text-{value}指定大小，value可以是如下值。
+```
+h1
+h2
+h3
+h4
+h5
+h6
+subtitle-1
+subtitle-2
+body-1
+body-2
+button
+caption
+overline
+```
+
+### 文字颜色
+有两种方式
+1. `<div class="red">`这样直接指定颜色
+2. `<span class="red--text">`这样指定`颜色--text`。
+
+## v-spacer用途
+v-spacer可以填充一部分空余，比如让图标靠右排列，左边可以放一个v-spacer。
+
 
 ## 图标
 使用这里的`https://materialdesignicons.com/cdn/2.0.46/`

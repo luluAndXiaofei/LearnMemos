@@ -1,15 +1,17 @@
 <template>
   <div>
-      最新的日志
+    <Passage v-for="item in 5" :key="item"></Passage>
   </div>
 </template>
 
 <script>
-export default {
+import Passage from "../components/Passage";
 
-}
+export default {
+  components: {
+    Passage,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
