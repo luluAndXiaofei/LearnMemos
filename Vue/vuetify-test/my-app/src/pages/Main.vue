@@ -9,7 +9,7 @@
         close
         color="primary"
         outlined
-        @click:close="chip1 = false"
+        @click:close="handleCloseLabel"
         small
       >
         {{ label }}
@@ -17,12 +17,12 @@
     </div>
 
     <Passage
-      v-for="(item, i) in 10"
+      v-for="(item, i) in passages"
       :key="i"
-      :title="'我的文章' + i"
-      :subTitle="'我的文章副标题。也就是第一句话'"
-      :views="256"
-      :updateTime="i + '小时前'"
+      :title="item.title"
+      :subTitle="item.subTitle"
+      :views="item.views"
+      :updateTime="item.updateTime + '小时前'"
       @clickLabel="onClickLabel"
       :labels="['java', 'python', 'javascript', 'vue']"
     ></Passage>
@@ -31,26 +31,39 @@
 
 <script>
 import Passage from "../components/Passage";
+import { api } from "../service/api";
 
 export default {
   components: {
     Passage,
   },
+
   data() {
     return {
       chip1: false,
       label: "",
+      passages:[],
     };
   },
+
+  async created() {
+    this.passages = await this.getLastPassageList();
+  },
+
   methods: {
-    onClickLabel(label) {
+    async getLastPassageList() {
+      return await api.getPassageList();
+    },
+
+    async onClickLabel(label) {
       this.label = label;
       this.chip1 = true;
       this.scrollToTop();
+      this.passages = await api.getPassageListByLabel(label);
     },
 
     scrollToTop() {
-      var top = document.documentElement.scrollTop
+      var top = document.documentElement.scrollTop;
       var speed = Math.ceil(top / 2)
       var timer = setInterval(() => {
         top = top - speed;
@@ -60,6 +73,11 @@ export default {
         }
       }, 100);
     },
+
+    async handleCloseLabel() {
+      this.chip1 = false;
+      this.passages = await this.getLastPassageList();
+    }
   },
 };
 </script>

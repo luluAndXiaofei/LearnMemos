@@ -98,6 +98,7 @@
 
 <script>
 import Tooltip from "../components/Tooltip";
+import { api } from "../service/api";
 
 export default {
   components: {
@@ -116,85 +117,8 @@ export default {
     };
   },
 
-  created() {
-    this.items = [
-      {
-        title: "Vuetify",
-        secondaryText: "Vue的ui库-Vuetify的介绍",
-        active: false,
-        items: [
-          {
-            title: "日志1",
-            active: false,
-          },
-          {
-            title: "日志2",
-            active: false,
-          },
-        ],
-      },
-      {
-        title: "Vue",
-        secondaryText: "前端框架Vue",
-        active: false,
-        items: [
-          {
-            title: "日志1",
-            active: false,
-          },
-          {
-            title: "日志2",
-            active: false,
-          },
-        ],
-      },
-      {
-        title: "Python",
-        secondaryText: "Python日志",
-        items: [
-          {
-            title: "日志1",
-            active: false,
-          },
-          {
-            title: "日志2",
-            active: false,
-          },
-        ],
-      },
-      {
-        title: "Java",
-        secondaryText: "Java日志",
-        items: [
-          {
-            title: "日志1",
-            active: false,
-          },
-          {
-            title: "日志2",
-            active: false,
-          },
-        ],
-      },
-      {
-        title: "JavaScript",
-        secondaryText: "JavaScript日志",
-        items: [
-          {
-            title: "日志1",
-            active: false,
-          },
-          {
-            title: "日志2",
-            active: false,
-          },
-        ],
-      },
-      {
-        title: "PostgreSQL",
-        items: [],
-      },
-    ];
+  async created() {
+    this.items = await api.getCategoryList();
   },
 
   methods: {
