@@ -87,8 +87,9 @@ user@ip-172-31-23-8 ~]$
 
 ![2](../pic/2.png)
 
-
-### 5.本地ssh连接
+===================
+## 其他方便的操作
+### 1.本地ssh连接
 ```
 cd mykey.pem所在的目录
 chmod 400 mykey.pem
@@ -96,3 +97,19 @@ ssh -i "mykey.pem" ec2-user@ec2-3-135-230-142.us-east-2.compute.amazonaws.com
 ```
 主机名参考如下的【sshクライアント】
 ![3](../pic/3.png)
+
+### 2.nginx的日志同步到EC2的目录下
+启动时指定`-v`。把EC2本地设置好的default.conf跟容器同步，并把容器的nginx日志与EC2的本地同步
+```
+docker run -it -p 80:80 --rm --name dockerize-vuejs-app-1 -v ~/default.conf:/etc/nginx/conf.d/default.conf -v ~/access.log:/var/log/nginx/ vuejs-cookbook/dockerize-vuejs-app
+```
+
+### 3.nginx相关
+- nginx设置文件目录
+`/etc/nginx/`下。
+- nginx改变设置后重新读取
+```shell
+nginx -s reload
+```
+- nginx日志位置
+`/var/log/nginx`
