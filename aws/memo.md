@@ -45,12 +45,15 @@ git clone xxx
 ```
 
 ### 3.启动docker
-进入到EC2管理控制台，并执行以下命令。
+EC2管理控制台，进入dockerfile所在目录并执行以下命令。
 ```shell
-启动docker
+# 启动docker
 sudo service docker start
 
-映射EC2端口80到docker内的80
+# 编译docker image
+docker build -t vuejs-cookbook/dockerize-vuejs-app .
+
+# 启动从起，映射EC2端口80到docker内的80
 docker run -it -p 80:80 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/dockerize-vuejs-app
 ```
 
@@ -87,6 +90,55 @@ user@ip-172-31-23-8 ~]$
 
 ![2](../pic/2.png)
 
+### 5.创建mysql容器
+[参考url](https://blog.csdn.net/qq_42891915/article/details/90116190)
+进入到mysql的dockerfile所在目录，执行编译命令
+```
+docker build . -t docker-mysql
+```
+参考。dockerfile内容
+```
+FROM mysql:5.7.20
+
+#设置免密登录
+ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
+    
+#将所需文件放到容器中
+COPY setup.sh /mysql/setup.sh
+COPY schema.sql /mysql/schema.sql
+COPY privileges.sql /mysql/privileges.sql
+    
+#设置容器启动时执行的命令
+CMD ["sh", "/mysql/setup.sh"]
+```
+
+启动容器。指定容器名为mysql。映射端口号本机：docker都为3306
+```
+docker run -d -p 3366:3306 --name mysql docker-mysql 
+```
+
+连接容器
+```
+docker exec -it mysql sh
+```
+
+连接数据库
+```shell
+# 密码123456
+# 连接mysql
+mysql -u docker -p
+# 切换数据库
+use docker_mysql;
+# 查看所有表
+show tables;
+# 查看用户表
+select * from user;
+```
+使用DBeaver连接时的配置
+![4](../pic/4.png)
+![5](../pic/5.png)
+
+
 ===================
 ## 其他方便的操作
 ### 1.本地ssh连接
@@ -113,3 +165,23 @@ nginx -s reload
 ```
 - nginx日志位置
 `/var/log/nginx`
+
+### 4.解决路径直接输入造成404的问题
+设置以下的内容，当用户请求 http://localhost/example 时，这里的 $uri 就是 /example。 
+try_files 会到硬盘里尝试找这个文件。如果存在名为 /$root/example（其中 $root 是项目代码安装目录）的文件，就直接把这个文件的内容发送给用户。 
+显然，目录中没有叫 example 的文件。然后就看 $uri/，增加了一个 /，也就是看有没有名为 /$root/example/ 的目录。 
+又找不到，就会 fall back 到 try_files 的最后一个选项 /index.php，发起一个内部 “子请求”，也就是相当于 nginx 发起一个 HTTP 请求到 http://localhost/index.php。
+[参考url1](https://blog.csdn.net/hanghangaidoudou/article/details/80817686)
+[参考url2](https://www.cnblogs.com/boundless-sky/p/9459775.html)
+
+```
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+### 5.传输EC2中的文件到本地
+使用scp命令，并指定私钥。`scp -i [私钥] [EC2用户名]@[EC2域名]:[文件名] [下载到的目录名]`
+```shell
+$ sudo scp -i mykey.pem ec2-user@ec2-3-135-230-142.us-east-2.compute.amazonaws.com:~/default.conf ~/Desktop
+```
